@@ -4,20 +4,28 @@ const enrollmentsController = require("../controllers/enrollments");
 // ============================================
 // GET routes
 // ============================================
+// get all enrollments
 router.get("/", enrollmentsController.getAll);
-router.get("/:id", enrollmentsController.getById);
 
-// ============================================
-// POST route
-// ============================================
-router.post("/", enrollmentsController.insertClassSection);
+// // get enrollment by id
+// router.get("/:id", enrollmentsController.getById);
 
-// ============================================
-// PUT route
-// ============================================
-router.put(":/id", enrollmentsController.updateClassSection);
+// // ============================================
+// // POST route
+// // ============================================
+// // add enrollment
+// router.post("/", enrollmentsController.insertClassSection);
 
-// ============================================
-// DELETE route
-// ============================================
-router.delete("/:id", enrollmentsController.deleteClassSection);
+// // ============================================
+// // PUT route
+// // ============================================
+// // update enrollment by id
+// router.put(":/id", enrollmentsController.updateClassSection);
+
+// // ============================================
+// // DELETE route
+// // ============================================
+// // delete enrollment by id
+// router.delete("/:id", enrollmentsController.deleteClassSection);
+
+module.exports = router;

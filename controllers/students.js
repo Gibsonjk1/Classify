@@ -4,10 +4,14 @@ const studentsUtils = {};
 // ==============================================
 // GET logic
 // ==============================================
+// get all students
 studentsUtils.getAll = async (req, res, next) => {
   // getAll logic
+  const response = "Students listed here.";
+  res.send(response);
 };
 
+// get student by id
 studentsUtils.getById = async (req, res, next) => {
   // getById logic
 };
@@ -15,6 +19,7 @@ studentsUtils.getById = async (req, res, next) => {
 // ==============================================
 // POST logic
 // ==============================================
+// add student
 studentsUtils.insertStudents = async (req, res) => {
   // insertStudents logic
 };
@@ -22,6 +27,7 @@ studentsUtils.insertStudents = async (req, res) => {
 // ==============================================
 // PUT logic
 // ==============================================
+// update student by id
 studentsUtils.updateStudents = async (req, res) => {
   // updateStudents logic
 };
@@ -29,6 +35,7 @@ studentsUtils.updateStudents = async (req, res) => {
 // ==============================================
 // DELETE logic
 // ==============================================
+// delete student by id
 studentsUtils.deleteStudents = async (req, res) => {
   // deleteStudents logic
 };

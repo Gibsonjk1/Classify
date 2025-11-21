@@ -4,20 +4,28 @@ const teachersController = require("../controllers/teachers");
 // ============================================
 // GET routes
 // ============================================
+// get all teachers
 router.get("/", teachersController.getAll);
-router.get("/:id", teachersController.getById);
 
-// ============================================
-// POST route
-// ============================================
-router.post("/", teachersController.insertClassSection);
+// // get teacher by id
+// router.get("/:id", teachersController.getById);
 
-// ============================================
-// PUT route
-// ============================================
-router.put(":/id", teachersController.updateClassSection);
+// // ============================================
+// // POST route
+// // ============================================
+// // add teacher
+// router.post("/", teachersController.insertClassSection);
 
-// ============================================
-// DELETE route
-// ============================================
-router.delete("/:id", teachersController.deleteClassSection);
+// // ============================================
+// // PUT route
+// // ============================================
+// // update teacher by id
+// router.put(":/id", teachersController.updateClassSection);
+
+// // ============================================
+// // DELETE route
+// // ============================================
+// // delete teacher by id
+// router.delete("/:id", teachersController.deleteClassSection);
+
+module.exports = router;

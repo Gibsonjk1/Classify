@@ -4,20 +4,28 @@ const classesController = require("../controllers/classes");
 // ============================================
 // GET routes
 // ============================================
+// get all classes
 router.get("/", classesController.getAll);
-router.get("/:id", classesController.getById);
 
-// ============================================
-// POST route
-// ============================================
-router.post("/", classesController.insertClassSection);
+// // get class by id
+// router.get("/:id", classesController.getById);
 
-// ============================================
-// PUT route
-// ============================================
-router.put(":/id", classesController.updateClassSection);
+// // ============================================
+// // POST route
+// // ============================================
+// // add class
+// router.post("/", classesController.insertClassSection);
 
-// ============================================
-// DELETE route
-// ============================================
-router.delete("/:id", classesController.deleteClassSection);
+// // ============================================
+// // PUT route
+// // ============================================
+// // update class by id
+// router.put(":/id", classesController.updateClassSection);
+
+// // ============================================
+// // DELETE route
+// // ============================================
+// // delete class by id
+// router.delete("/:id", classesController.deleteClassSection);
+
+module.exports = router;

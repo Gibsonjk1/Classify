@@ -27,7 +27,7 @@ mongodb.initDb((err, db) => {
     });
     // routes after DB is connected
     app
-      .use("/", require("./routes"))
+      .use("/", require("./routes/index"))
       .use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
     // Start server after everything is set up

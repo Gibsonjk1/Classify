@@ -4,32 +4,40 @@ const classroomsUtils = {};
 // ==============================================
 // GET logic
 // ==============================================
+// get all classrooms
 classroomsUtils.getAll = async (req, res, next) => {
   // getAll logic
+  const response = "classrooms listed here";
+  res.send(response);
 };
 
-// classroomsUtils.getById = async (req, res, next) => {
-//   // getById logic
-// };
+// get classroom by id
+classroomsUtils.getById = async (req, res, next) => {
+  // getById logic
+};
 
-// // ==============================================
-// // POST logic
-// // ==============================================
-// classroomsUtils.insertClassrooms = async (req, res) => {
-//   // insertClassrooms logic
-// };
+// ==============================================
+// POST logic
+// ==============================================
+// add classroom
+classroomsUtils.insertClassrooms = async (req, res) => {
+  // insertClassrooms logic
+};
 
-// // ==============================================
-// // PUT logic
-// // ==============================================
-// classroomsUtils.updateClassrooms = async (req, res) => {
-//   // updateClassrooms logic
-// };
+// ==============================================
+// PUT logic
+// ==============================================
+// update classroom by id
+classroomsUtils.updateClassrooms = async (req, res) => {
+  // updateClassrooms logic
+};
 
-// // ==============================================
-// // DELETE logic
-// // ==============================================
-// classroomsUtils.deleteClassrooms = async (req, res) => {
-//   // deleteClassrooms logic
-// };
+// ==============================================
+// DELETE logic
+// ==============================================
+// delete classroom by id
+classroomsUtils.deleteClassrooms = async (req, res) => {
+  // deleteClassrooms logic
+};
+
 module.exports = classroomsUtils;

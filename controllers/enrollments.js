@@ -4,10 +4,14 @@ const enrollmentsUtils = {};
 // ==============================================
 // GET logic
 // ==============================================
+// get all enrollments
 enrollmentsUtils.getAll = async (req, res, next) => {
   // getAll logic
+  const response = "enrollments listed here";
+  res.send(response);
 };
 
+// get enrollment by id
 enrollmentsUtils.getById = async (req, res, next) => {
   // getById logic
 };
@@ -15,6 +19,7 @@ enrollmentsUtils.getById = async (req, res, next) => {
 // ==============================================
 // POST logic
 // ==============================================
+// add enrollment
 enrollmentsUtils.insertEnrollments = async (req, res) => {
   // insertEnrollments logic
 };
@@ -22,6 +27,7 @@ enrollmentsUtils.insertEnrollments = async (req, res) => {
 // ==============================================
 // PUT logic
 // ==============================================
+// update enrollment by id
 enrollmentsUtils.updateEnrollments = async (req, res) => {
   // updateEnrollments logic
 };
@@ -29,6 +35,7 @@ enrollmentsUtils.updateEnrollments = async (req, res) => {
 // ==============================================
 // DELETE logic
 // ==============================================
+// delete enrollment by id
 enrollmentsUtils.deleteEnrollments = async (req, res) => {
   // deleteEnrollments logic
 };

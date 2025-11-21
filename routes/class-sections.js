@@ -4,20 +4,28 @@ const classSectionController = require("../controllers/class-sections");
 // ============================================
 // GET routes
 // ============================================
+// get all class sections
 router.get("/", classSectionController.getAll);
-router.get("/:id", classSectionController.getById);
 
-// ============================================
-// POST route
-// ============================================
-router.post("/", classSectionController.insertClassSection);
+// // get class section by id
+// router.get("/:id", classSectionController.getById);
 
-// ============================================
-// PUT route
-// ============================================
-router.put(":/id", classSectionController.updateClassSection);
+// // ============================================
+// // POST route
+// // ============================================
+// // add class section
+// router.post("/", classSectionController.insertClassSection);
 
-// ============================================
-// DELETE route
-// ============================================
-router.delete("/:id", classSectionController.deleteClassSection);
+// // ============================================
+// // PUT route
+// // ============================================
+// // update class section by id
+// router.put("/:id", classSectionController.updateClassSection);
+
+// // ============================================
+// // DELETE route
+// // ============================================
+// // delete class section by id
+// router.delete("/:id", classSectionController.deleteClassSection);
+
+module.exports = router;

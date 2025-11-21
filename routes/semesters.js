@@ -4,20 +4,28 @@ const semestersController = require("../controllers/semesters");
 // ============================================
 // GET routes
 // ============================================
+// get all semesters
 router.get("/", semestersController.getAll);
-router.get("/:id", semestersController.getById);
 
-// ============================================
-// POST route
-// ============================================
-router.post("/", semestersController.insertClassSection);
+// // get semester by id
+// router.get("/:id", semestersController.getById);
 
-// ============================================
-// PUT route
-// ============================================
-router.put(":/id", semestersController.updateClassSection);
+// // ============================================
+// // POST route
+// // ============================================
+// // add semester
+// router.post("/", semestersController.insertClassSection);
 
-// ============================================
-// DELETE route
-// ============================================
-router.delete("/:id", semestersController.deleteClassSection);
+// // ============================================
+// // PUT route
+// // ============================================
+// // update semester by id
+// router.put(":/id", semestersController.updateClassSection);
+
+// // ============================================
+// // DELETE route
+// // ============================================
+// // delete semester by id
+// router.delete("/:id", semestersController.deleteClassSection);
+
+module.exports = router;

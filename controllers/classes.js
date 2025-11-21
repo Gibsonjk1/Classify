@@ -4,35 +4,40 @@ const classesUtils = {};
 // ==============================================
 // GET logic
 // ==============================================
+// get all classes
 classesUtils.getAll = async (req, res, next) => {
   // getAll logic
-  return "classes listed here";
+  const response = "classes listed here";
+  res.send(response);
 };
 
+// get class by id
 classesUtils.getById = async (req, res, next) => {
   // getById logic
-  return "classes by id listed here";
 };
 
-// // ==============================================
-// // POST logic
-// // ==============================================
-// classesUtils.insertClasses = async (req, res) => {
-//   // insertClasses logic
-// };
+// ==============================================
+// POST logic
+// ==============================================
+// add class
+classesUtils.insertClasses = async (req, res) => {
+  // insertClasses logic
+};
 
-// // ==============================================
-// // PUT logic
-// // ==============================================
-// classesUtils.updateClasses = async (req, res) => {
-//   // updateClasses logic
-// };
+// ==============================================
+// PUT logic
+// ==============================================
+// update class by id
+classesUtils.updateClasses = async (req, res) => {
+  // updateClasses logic
+};
 
-// // ==============================================
-// // DELETE logic
-// // ==============================================
-// classesUtils.deleteClasses = async (req, res) => {
-//   // deleteClasses logic
-// };
+// ==============================================
+// DELETE logic
+// ==============================================
+// delete class by id
+classesUtils.deleteClasses = async (req, res) => {
+  // deleteClasses logic
+};
 
 module.exports = classesUtils;
