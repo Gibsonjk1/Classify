@@ -1,4 +1,6 @@
 // imports
+const mongoDb = require("../db/connection");
+const ObejctId = require("mongodb").ObjectId;
 const teachersUtils = {};
 
 // ==============================================
@@ -6,9 +8,11 @@ const teachersUtils = {};
 // ==============================================
 // get all teachers
 teachersUtils.getAll = async (req, res, next) => {
-  // getAll logic
-  const response = "Teachers listed here.";
-  res.send(response);
+  const result = mongoDb.getDb().db("Classify").collection("teachers").find();
+  const teachers = await result.toArray();
+  res.setHeader("content-type", "application/json");
+  res.status(200);
+  res.json(teachers);
 };
 
 // get teacher by id

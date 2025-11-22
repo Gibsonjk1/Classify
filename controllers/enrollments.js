@@ -1,4 +1,6 @@
 // imports
+const mongoDb = require("../db/connection");
+const ObejctId = require("mongodb").ObjectId;
 const enrollmentsUtils = {};
 
 // ==============================================
@@ -6,9 +8,15 @@ const enrollmentsUtils = {};
 // ==============================================
 // get all enrollments
 enrollmentsUtils.getAll = async (req, res, next) => {
-  // getAll logic
-  const response = "enrollments listed here";
-  res.send(response);
+  const result = mongoDb
+    .getDb()
+    .db("Classify")
+    .collection("enrollments")
+    .find();
+  const enrollments = await result.toArray();
+  res.setHeader("content-type", "application/json");
+  res.status(200);
+  res.json(enrollments);
 };
 
 // get enrollment by id

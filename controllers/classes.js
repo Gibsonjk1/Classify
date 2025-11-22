@@ -1,4 +1,6 @@
 // imports
+const mongoDb = require("../db/connection");
+const ObejctId = require("mongodb").ObjectId;
 const classesUtils = {};
 
 // ==============================================
@@ -6,9 +8,15 @@ const classesUtils = {};
 // ==============================================
 // get all classes
 classesUtils.getAll = async (req, res, next) => {
-  // getAll logic
-  const response = "classes listed here";
-  res.send(response);
+  const result = mongoDb
+    .getDb()
+    .db("Classify")
+    .collection("classes")
+    .find();
+  const classes = await result.toArray();
+  res.setHeader("content-type", "application/json");
+  res.status(200);
+  res.json(classes);
 };
 
 // get class by id

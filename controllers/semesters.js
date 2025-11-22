@@ -1,4 +1,6 @@
 // imports
+const mongoDb = require("../db/connection");
+const ObejctId = require("mongodb").ObjectId;
 const semestersUtils = {};
 
 // ==============================================
@@ -6,9 +8,15 @@ const semestersUtils = {};
 // ==============================================
 // get all semesters
 semestersUtils.getAll = async (req, res, next) => {
-  // getAll logic
-  const response = "Semesters listed here.";
-  res.send(response);
+  const result = mongoDb
+    .getDb()
+    .db("Classify")
+    .collection("semesters")
+    .find();
+  const semesters = await result.toArray();
+  res.setHeader("content-type", "application/json");
+  res.status(200);
+  res.json(semesters);
 };
 
 // get semester by id
