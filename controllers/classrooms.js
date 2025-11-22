@@ -8,7 +8,11 @@ const classroomsUtils = {};
 // ==============================================
 // get all classrooms
 classroomsUtils.getAll = async (req, res, next) => {
-  const result = mongoDb.getDb().db("Classify").collection("classrooms").find();
+  const result = mongoDb
+    .getDb()
+    .db("Classify")
+    .collection("classrooms")
+    .find();
   const classrooms = await result.toArray();
   res.setHeader("content-type", "application/json");
   res.status(200);
