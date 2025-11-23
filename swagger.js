@@ -1,12 +1,16 @@
+require("dotenv").config();
 const swaggerAutogen = require("swagger-autogen")();
+const hostId = process.env.ENVIRONMENT;
+const schemeId = process.env.SCHEME;
+
 
 const doc = {
   info: {
     title: "classify",
     description: "CSE 341 final project",
   },
-  host: "localhost:3000",
-  schemes: ["http"],
+  host: hostId,
+  schemes: [schemeId],
 };
 
 const outputFile = "./swagger.json";
