@@ -30,9 +30,10 @@ mongodb.initDb((err, db) => {
       .use("/", require("./routes/index"))
       .use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+    const [hostId, portId, schemeId] = config.checkEnv();
     // Start server after everything is set up
-    app.listen(PORT, () => {
-      console.log(`Server running at http://localhost:${PORT}`);
+    app.listen(portId, () => {
+      console.log(`Server running at ${schemeId}://${hostId}:${portId}`);
     });
   }
 });
