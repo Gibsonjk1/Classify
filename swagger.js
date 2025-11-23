@@ -1,7 +1,5 @@
 require("dotenv").config();
 const swaggerAutogen = require("swagger-autogen")();
-const hostId = process.env.HOST;
-const schemeId = process.env.SCHEME;
 
 
 const doc = {
