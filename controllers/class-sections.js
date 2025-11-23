@@ -8,20 +8,56 @@ const classSectionsUtils = {};
 // ==============================================
 // get all class sections
 classSectionsUtils.getAll = async (req, res, next) => {
-  const result = mongoDb
-    .getDb()
-    .db("Classify")
-    .collection("class-sections")
-    .find();
-  const classSections = await result.toArray();
-  res.setHeader("content-type", "application/json");
-  res.status(200);
-  res.json(classSections);
+  try {
+    const result = mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("class-sections")
+      .find();
+    const classSections = await result.toArray();
+    res.setHeader("content-type", "application/json");
+    res.status(200);
+    res.json(classSections);
+  } catch (error) {
+    res
+      .status(500)
+      .json(
+        error.message || "An error occured while retrieving the class sections."
+      );
+  }
 };
 
 // get class section by id
 classSectionsUtils.getById = async (req, res, next) => {
-  // getById logic
+  try {
+    const classSectionId = new ObejctId(req.params.id);
+    const result = mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("class-section")
+      .find({ classId: classSectionId });
+    const classSection = await result.toArray();
+    if (!classSection.length > 0) {
+      const error = new Error("No data found with that Class Section Id.");
+      error.name = "blank id";
+      throw error;
+    }
+    res.setHeader("content-type", "application/json");
+    res.status(200).json(classSection[0]);
+  } catch (error) {
+    if (error.isJoi) {
+      res.status(422).json(error.message);
+    } else if (error.name == "blank id") {
+      res.status(404).json(error.message);
+    } else {
+      res
+        .status(500)
+        .json(
+          error.message ||
+            "An error occured while retrieving the class section."
+        );
+    }
+  }
 };
 
 // ==============================================
@@ -45,7 +81,14 @@ classSectionsUtils.updateClassSection = async (req, res) => {
 // ==============================================
 // delete class section by id
 classSectionsUtils.deleteClassSection = async (req, res) => {
-  // deleteClassSection logic
+  try {
+    const classSectionId = new ObejctId(req.params.id);
+    const result = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("class-section")
+      .deleteOne({ classId: classSectionId }, true);
+  } catch (error) {}
 };
 
 module.exports = classSectionsUtils;
