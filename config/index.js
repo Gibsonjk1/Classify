@@ -1,17 +1,16 @@
 require("dotenv").config();
 const swaggerAutogen = require("swagger-autogen")();
 
-
 const doc = {
-  info: {
-    title: "classify",
-    description: "CSE 341 final project",
-  },
-  // host: "localhost:3000",
-  // schemes: ["http"],
-  host: "classify-yx4j.onrender.com",
-  schemes: ["https"],
-};
+    info: {
+      title: "classify",
+      description: "CSE 341 final project",
+    },
+    // host: "localhost:3000",
+    // schemes: ["http"],
+    host: "classify-55f0.onrender.com",
+    schemes: ["https"],
+  };
 
 const outputFile = "./swagger.json";
 const routes = ["./routes/index.js"];
