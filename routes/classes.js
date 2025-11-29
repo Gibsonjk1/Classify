@@ -14,7 +14,7 @@ router.get("/:courseCode", classesController.getByCourseCode);
 // // POST route
 // // ============================================
 // // add class
-// router.post("/", classesController.insertClassSection);
+router.post("/", classesController.insertClass);
 
 // // ============================================
 // // PUT route

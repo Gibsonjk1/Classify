@@ -50,8 +50,31 @@ classesUtils.getByCourseCode = async (req, res, next) => {
 // POST logic
 // ==============================================
 // add class
-classesUtils.insertClasses = async (req, res) => {
-  // insertClasses logic
+classesUtils.insertClass = async (req, res) => {
+  try {
+    const _class = {
+      _id: req.body._id,
+      courseCode: req.body.courseCode,
+      title: req.body.title,
+      credits: req.body.credits,
+      description: req.body.description,
+    };
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("classes")
+      .insertOne(_class);
+    // validation function goes here
+    if (response.acknowledged) {
+      res.status(201).json(response);
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json(
+        error.message || "Some error occured while inserting the class."
+      );
+  }
 };
 
 // ==============================================

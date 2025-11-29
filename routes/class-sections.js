@@ -14,7 +14,7 @@ router.get("/:sectionNumber", classSectionController.getBySectionNumber);
 // // POST route
 // // ============================================
 // // add class section
-// router.post("/", classSectionController.insertClassSection);
+router.post("/", classSectionController.insertClassSection);
 
 // // ============================================
 // // PUT route

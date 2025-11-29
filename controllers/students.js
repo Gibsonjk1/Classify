@@ -50,8 +50,33 @@ studentsUtils.getByStudentId = async (req, res, next) => {
 // POST logic
 // ==============================================
 // add student
-studentsUtils.insertStudents = async (req, res) => {
-  // insertStudents logic
+studentsUtils.insertStudent = async (req, res) => {
+  try {
+      const student = {
+        _id: req.body._id,
+        studentId: req.body.studentId,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        major: req.body.major,
+        createdAt: req.body.createdAt
+      };
+      const response = await mongoDb
+        .getDb()
+        .db("Classify")
+        .collection("students")
+        .insertOne(student);
+      // validation function goes here
+      if (response.acknowledged) {
+        res.status(201).json(response);
+      }
+    } catch (error) {
+      res
+        .status(500)
+        .json(
+          error.message || "Some error occured while inserting the student."
+        );
+    }
 };
 
 // ==============================================

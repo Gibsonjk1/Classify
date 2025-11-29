@@ -14,7 +14,7 @@ router.get("/:_id", enrollmentsController.getById);
 // // POST route
 // // ============================================
 // // add enrollment
-// router.post("/", enrollmentsController.insertClassSection);
+router.post("/", enrollmentsController.insertEnrollment);
 
 // // ============================================
 // // PUT route

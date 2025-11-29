@@ -54,8 +54,32 @@ enrollmentsUtils.getById = async (req, res, next) => {
 // POST logic
 // ==============================================
 // add enrollment
-enrollmentsUtils.insertEnrollments = async (req, res) => {
-  // insertEnrollments logic
+enrollmentsUtils.insertEnrollment = async (req, res) => {
+  try {
+      const enrollment = {
+        _id: req.body._id,
+        studentId: req.body.studentId,
+        sectionId: req.body.sectionId,
+        status: req.body.status,
+        enrolledAt: req.body.enrolledAt,
+        grade: req.body.grade
+      };
+      const response = await mongoDb
+        .getDb()
+        .db("Classify")
+        .collection("enrollments")
+        .insertOne(enrollment);
+      // validation function goes here
+      if (response.acknowledged) {
+        res.status(201).json(response);
+      }
+    } catch (error) {
+      res
+        .status(500)
+        .json(
+          error.message || "Some error occured while inserting the enrollment."
+        );
+    }
 };
 
 // ==============================================

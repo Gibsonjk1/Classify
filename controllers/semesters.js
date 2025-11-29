@@ -50,8 +50,33 @@ semestersUtils.getById = async (req, res, next) => {
 // POST logic
 // ==============================================
 // add semester
-semestersUtils.insertSemesters = async (req, res) => {
-  // insertSemesters logic
+semestersUtils.insertSemester = async (req, res) => {
+  try {
+      const semester = {
+        _id: req.body._id,
+        name: req.body.name,
+        year: req.body.year,
+        term: req.body.term,
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
+        active: req.body.active
+      };
+      const response = await mongoDb
+        .getDb()
+        .db("Classify")
+        .collection("semesters")
+        .insertOne(semester);
+      // validation function goes here
+      if (response.acknowledged) {
+        res.status(201).json(response);
+      }
+    } catch (error) {
+      res
+        .status(500)
+        .json(
+          error.message || "Some error occured while inserting the semester."
+        );
+    }
 };
 
 // ==============================================

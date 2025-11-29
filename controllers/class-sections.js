@@ -65,7 +65,33 @@ classSectionsUtils.getBySectionNumber = async (req, res, next) => {
 // ==============================================
 // add class section
 classSectionsUtils.insertClassSection = async (req, res) => {
-  // insertClassSection logic
+  try {
+    const classSection = {
+      _id: req.body._id,
+      classId: req.body.classId,
+      sectionNumber: req.body.sectionNumber,
+      semester: req.body.semester,
+      teacherId: req.body.teacherId,
+      classroomId: req.body.classroomId,
+      meetingTimes: req.body.meetingTimes,
+      capacity: req.body.capacity,
+    };
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("class-sections")
+      .insertOne(classSection);
+    // validation function goes here
+    if (response.acknowledged) {
+      res.status(201).json(response);
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json(
+        error.message || "Some error occured while inserting the class section."
+      );
+  }
 };
 
 // ==============================================

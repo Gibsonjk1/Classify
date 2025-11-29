@@ -14,7 +14,7 @@ router.get("/:roomNumber", classroomsController.getByRoomNumber);
 // // POST route
 // // ============================================
 // // add classroom
-// router.post("/", classroomsController.insertClassSection);
+router.post("/", classroomsController.insertClassroom);
 
 // // ============================================
 // // PUT route

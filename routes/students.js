@@ -14,7 +14,7 @@ router.get("/:studentId", studentsController.getByStudentId);
 // // POST route
 // // ============================================
 // // add student
-// router.post("/", studentsController.insertClassSection);
+router.post("/", studentsController.insertStudent);
 
 // // ============================================
 // // PUT route

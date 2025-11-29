@@ -50,8 +50,30 @@ classroomsUtils.getByRoomNumber = async (req, res, next) => {
 // POST logic
 // ==============================================
 // add classroom
-classroomsUtils.insertClassrooms = async (req, res) => {
-  // insertClassrooms logic
+classroomsUtils.insertClassroom = async (req, res) => {
+  try {
+    const classroom = {
+      _id: req.body._id,
+      building: req.body.building,
+      roomNumber: req.body.roomNumber,
+      capacity: req.body.capacity,
+    };
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("classrooms")
+      .insertOne(classroom);
+    // validation function goes here
+    if (response.acknowledged) {
+      res.status(201).json(response);
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json(
+        error.message || "Some error occured while inserting the classroom."
+      );
+  }
 };
 
 // ==============================================

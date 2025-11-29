@@ -14,7 +14,7 @@ router.get("/:semesterId", semestersController.getById);
 // // POST route
 // // ============================================
 // // add semester
-// router.post("/", semestersController.insertClassSection);
+router.post("/", semestersController.insertSemester);
 
 // // ============================================
 // // PUT route

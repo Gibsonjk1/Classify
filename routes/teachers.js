@@ -14,7 +14,7 @@ router.get("/:teacherId", teachersController.getByTeacherId);
 // // POST route
 // // ============================================
 // // add teacher
-// router.post("/", teachersController.insertClassSection);
+router.post("/", teachersController.insertTeacher);
 
 // // ============================================
 // // PUT route
