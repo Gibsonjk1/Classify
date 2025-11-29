@@ -15,7 +15,7 @@ classroomsUtils.getAll = async (req, res, next) => {
   res.json(classrooms);
 };
 
-// get classroom by id
+// get classroom by room number
 classroomsUtils.getById = async (req, res, next) => {
   try {
     const roomNumber = req.params.roomNumber;
@@ -66,9 +66,31 @@ classroomsUtils.updateClassrooms = async (req, res) => {
 // ==============================================
 // DELETE logic
 // ==============================================
-// delete classroom by id
-classroomsUtils.deleteClassrooms = async (req, res) => {
-  // deleteClassrooms logic
+// delete classroom by room number
+classroomsUtils.deleteById = async (req, res) => {
+  try {
+    const roomNumber = req.params.roomNumber;
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("classrooms")
+      .deleteOne({ roomNumber: roomNumber }, true);
+    if (response.deletedCount > 0) {
+      res.status(204).send();
+    } else {
+      const error = new Error("classroom code does not exist");
+      error.name = "no such id";
+      throw error;
+    }
+  } catch (error) {
+    if ((error.name = "no such id")) {
+      res.status(404).json(error.message);
+    } else {
+      res
+        .status(500)
+        .json(error.message || "Some error occured while deleting the classroom.");
+    }
+  }
 };
 
 module.exports = classroomsUtils;

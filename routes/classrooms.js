@@ -7,7 +7,7 @@ const classroomsController = require("../controllers/classrooms");
 // get all classrooms
 router.get("/", classroomsController.getAll);
 
-// // get classroom by id
+// // get classroom by room number
 router.get("/:roomNumber", classroomsController.getById);
 
 // // ============================================
@@ -25,7 +25,7 @@ router.get("/:roomNumber", classroomsController.getById);
 // // ============================================
 // // DELETE route
 // // ============================================
-// // delete classroom by id
-// router.delete("/:id", classroomsController.deleteClassSection);
+// // delete classroom by room number
+router.delete("/:roomNumber", classroomsController.deleteById);
 
 module.exports = router;

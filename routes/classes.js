@@ -25,7 +25,7 @@ router.get("/:courseCode", classesController.getById);
 // // ============================================
 // // DELETE route
 // // ============================================
-// // delete class by id
-// router.delete("/:id", classesController.deleteClassSection);
+// // delete class by course code
+router.delete("/:courseCode", classesController.deleteById);
 
 module.exports = router;

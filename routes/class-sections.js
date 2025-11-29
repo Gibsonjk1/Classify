@@ -7,7 +7,7 @@ const classSectionController = require("../controllers/class-sections");
 // get all class sections
 router.get("/", classSectionController.getAll);
 
-// // get class section by id
+// // get class section by section number
 router.get("/:sectionNumber", classSectionController.getById);
 
 // // ============================================
@@ -25,7 +25,7 @@ router.get("/:sectionNumber", classSectionController.getById);
 // // ============================================
 // // DELETE route
 // // ============================================
-// // delete class section by id
-// router.delete("/:id", classSectionController.deleteClassSection);
+// // delete class section by section number
+router.delete("/:sectionNumber", classSectionController.deleteById);
 
 module.exports = router;
