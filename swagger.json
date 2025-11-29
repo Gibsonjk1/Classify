@@ -5,10 +5,10 @@
     "description": "CSE 341 final project",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "classify-yx4j.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/": {
