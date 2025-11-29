@@ -8,7 +8,7 @@ const enrollmentsController = require("../controllers/enrollments");
 router.get("/", enrollmentsController.getAll);
 
 // // get enrollment by id
-// router.get("/:id", enrollmentsController.getById);
+router.get("/:_id", enrollmentsController.getById);
 
 // // ============================================
 // // POST route

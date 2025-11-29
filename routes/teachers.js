@@ -8,7 +8,7 @@ const teachersController = require("../controllers/teachers");
 router.get("/", teachersController.getAll);
 
 // // get teacher by id
-// router.get("/:id", teachersController.getById);
+router.get("/:teacherId", teachersController.getById);
 
 // // ============================================
 // // POST route

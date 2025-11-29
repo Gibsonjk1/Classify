@@ -21,7 +21,34 @@ enrollmentsUtils.getAll = async (req, res, next) => {
 
 // get enrollment by id
 enrollmentsUtils.getById = async (req, res, next) => {
-  // logic here
+  try {
+    const _id = req.params._id;
+    const result = mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("enrollments")
+      .find({ _id: _id });
+    const enrollment = await result.toArray();
+    if (!enrollment.length > 0) {
+      const error = new Error("No data found with that enrollment id.");
+      error.name = "blank id";
+      throw error;
+    }
+    res.setHeader("content-type", "application/json");
+    res.status(200).json(enrollment[0]);
+  } catch (error) {
+    if (error.isJoi) {
+      res.status(422).json(error.message);
+    } else if (error.name == "blank id") {
+      res.status(404).json(error.message);
+    } else {
+      res
+        .status(500)
+        .json(
+          error.message || "An error occured while retrieving the enrollment id."
+        );
+    }
+  }
 };
 
 // ==============================================

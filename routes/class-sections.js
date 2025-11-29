@@ -8,7 +8,7 @@ const classSectionController = require("../controllers/class-sections");
 router.get("/", classSectionController.getAll);
 
 // // get class section by id
-router.get("/:id", classSectionController.getById);
+router.get("/:sectionNumber", classSectionController.getById);
 
 // // ============================================
 // // POST route

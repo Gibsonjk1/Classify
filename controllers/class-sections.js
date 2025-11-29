@@ -14,11 +14,7 @@ classSectionsUtils.getAll = async (req, res, next) => {
       .db("Classify")
       .collection("class-sections")
       .find();
-    console.log("===============================")
-    console.log(result)
-    console.log("===============================");
     const classSections = await result.toArray();
-    console.log(classSections);
     res.setHeader("content-type", "application/json");
     res.status(200);
     res.json(classSections);
@@ -34,15 +30,15 @@ classSectionsUtils.getAll = async (req, res, next) => {
 // get class section by id
 classSectionsUtils.getById = async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const sectionNumber = req.params.sectionNumber;
     const result = mongoDb
       .getDb()
       .db("Classify")
       .collection("class-sections")
-      .find({ _id: id });
+      .find({ sectionNumber: sectionNumber });
     const classSection = await result.toArray();
     if (!classSection.length > 0) {
-      const error = new Error("No data found with that id.");
+      const error = new Error("No data found with that section number.");
       error.name = "blank id";
       throw error;
     }
@@ -58,7 +54,7 @@ classSectionsUtils.getById = async (req, res, next) => {
         .status(500)
         .json(
           error.message ||
-            "An error occured while retrieving the id."
+            "An error occured while retrieving the section number."
         );
     }
   }

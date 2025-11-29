@@ -8,7 +8,7 @@ const classesController = require("../controllers/classes");
 router.get("/", classesController.getAll);
 
 // // get class by id
-// router.get("/:id", classesController.getById);
+router.get("/:courseCode", classesController.getById);
 
 // // ============================================
 // // POST route

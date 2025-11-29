@@ -8,7 +8,7 @@ const studentsController = require("../controllers/students");
 router.get("/", studentsController.getAll);
 
 // // get student by id
-// router.get("/:id", studentsController.getById);
+router.get("/:studentId", studentsController.getById);
 
 // // ============================================
 // // POST route

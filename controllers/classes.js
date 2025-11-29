@@ -1,6 +1,5 @@
 // imports
 const mongoDb = require("../db/connection");
-const ObejctId = require("mongodb").ObjectId;
 const classesUtils = {};
 
 // ==============================================
@@ -17,7 +16,34 @@ classesUtils.getAll = async (req, res, next) => {
 
 // get class by id
 classesUtils.getById = async (req, res, next) => {
-  // logic here
+  try {
+    const courseCode = req.params.courseCode;
+    const result = mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("classes")
+      .find({ courseCode: courseCode });
+    const _class = await result.toArray();
+    if (!_class.length > 0) {
+      const error = new Error("No data found with that course code.");
+      error.name = "blank id";
+      throw error;
+    }
+    res.setHeader("content-type", "application/json");
+    res.status(200).json(_class[0]);
+  } catch (error) {
+    if (error.isJoi) {
+      res.status(422).json(error.message);
+    } else if (error.name == "blank id") {
+      res.status(404).json(error.message);
+    } else {
+      res
+        .status(500)
+        .json(
+          error.message || "An error occured while retrieving the course code."
+        );
+    }
+  }
 };
 
 // ==============================================
