@@ -5,10 +5,10 @@ const classroomsController = require("../controllers/classrooms");
 // GET routes
 // ============================================
 // get all classrooms
-router.get("/", classroomsController.getAll);
+router.get("/", classroomsController.getAllClassrooms);
 
-// // get classroom by room number
-router.get("/:roomNumber", classroomsController.getById);
+// // get classroom by roomNumber
+router.get("/:roomNumber", classroomsController.getByRoomNumber);
 
 // // ============================================
 // // POST route
@@ -25,7 +25,7 @@ router.get("/:roomNumber", classroomsController.getById);
 // // ============================================
 // // DELETE route
 // // ============================================
-// // delete classroom by room number
-router.delete("/:roomNumber", classroomsController.deleteById);
+// // delete classroom by roomNumber
+router.delete("/:roomNumber", classroomsController.deleteByRoomNumber);
 
 module.exports = router;

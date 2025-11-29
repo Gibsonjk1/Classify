@@ -1,6 +1,5 @@
 // imports
 const mongoDb = require("../db/connection");
-const ObejctId = require("mongodb").ObjectId;
 const teachersUtils = {};
 
 // ==============================================
@@ -8,11 +7,7 @@ const teachersUtils = {};
 // ==============================================
 // get all teachers
 teachersUtils.getAll = async (req, res, next) => {
-  const result = mongoDb
-    .getDb()
-    .db("Classify")
-    .collection("teachers")
-    .find();
+  const result = mongoDb.getDb().db("Classify").collection("teachers").find();
   const teachers = await result.toArray();
   res.setHeader("content-type", "application/json");
   res.status(200);
@@ -20,7 +15,7 @@ teachersUtils.getAll = async (req, res, next) => {
 };
 
 // get teacher by id
-teachersUtils.getById = async (req, res, next) => {
+teachersUtils.getByTeacherId = async (req, res, next) => {
   try {
     const teacherId = req.params.teacherId;
     const result = mongoDb
@@ -70,9 +65,33 @@ teachersUtils.updateTeachers = async (req, res) => {
 // ==============================================
 // DELETE logic
 // ==============================================
-// delete teacher by id
-teachersUtils.deleteTeachers = async (req, res) => {
-  // deleteTeachers logic
+// delete teacher by teacherId
+teachersUtils.deleteByTeacherId = async (req, res) => {
+  try {
+    const teacherId = req.params.teacherId;
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("teachers")
+      .deleteOne({ teacherId: teacherId }, true);
+    if (response.deletedCount > 0) {
+      res.status(204).send();
+    } else {
+      const error = new Error("teacher id does not exist");
+      error.name = "no such id";
+      throw error;
+    }
+  } catch (error) {
+    if ((error.name = "no such id")) {
+      res.status(404).json(error.message);
+    } else {
+      res
+        .status(500)
+        .json(
+          error.message || "Some error occured while deleting the teacher."
+        );
+    }
+  }
 };
 
 module.exports = teachersUtils;

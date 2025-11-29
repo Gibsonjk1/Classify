@@ -1,6 +1,5 @@
 // imports
 const mongoDb = require("../db/connection");
-const ObejctId = require("mongodb").ObjectId;
 const enrollmentsUtils = {};
 
 // ==============================================
@@ -71,8 +70,32 @@ enrollmentsUtils.updateEnrollments = async (req, res) => {
 // DELETE logic
 // ==============================================
 // delete enrollment by id
-enrollmentsUtils.deleteEnrollments = async (req, res) => {
-  // deleteEnrollments logic
+enrollmentsUtils.deleteById = async (req, res) => {
+  try {
+    const enrollmentId = req.params._id;
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("enrollments")
+      .deleteOne({ _id: enrollmentId }, true);
+    if (response.deletedCount > 0) {
+      res.status(204).send();
+    } else {
+      const error = new Error("enrollment id does not exist");
+      error.name = "no such id";
+      throw error;
+    }
+  } catch (error) {
+    if ((error.name = "no such id")) {
+      res.status(404).json(error.message);
+    } else {
+      res
+        .status(500)
+        .json(
+          error.message || "Some error occured while deleting the enrollment."
+        );
+    }
+  }
 };
 
 module.exports = enrollmentsUtils;

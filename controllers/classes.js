@@ -6,7 +6,7 @@ const classesUtils = {};
 // GET logic
 // ==============================================
 // get all classes
-classesUtils.getAll = async (req, res, next) => {
+classesUtils.getAllClasses = async (req, res, next) => {
   const result = mongoDb.getDb().db("Classify").collection("classes").find();
   const classes = await result.toArray();
   res.setHeader("content-type", "application/json");
@@ -14,8 +14,8 @@ classesUtils.getAll = async (req, res, next) => {
   res.json(classes);
 };
 
-// get class by course code
-classesUtils.getById = async (req, res, next) => {
+// get class by courseCode
+classesUtils.getByCourseCode = async (req, res, next) => {
   try {
     const courseCode = req.params.courseCode;
     const result = mongoDb
@@ -65,8 +65,8 @@ classesUtils.updateClasses = async (req, res) => {
 // ==============================================
 // DELETE logic
 // ==============================================
-// delete class by course code
-classesUtils.deleteById = async (req, res) => {
+// delete class by courseCode
+classesUtils.deleteByCourseCode = async (req, res) => {
   try {
     const courseCode = req.params.courseCode;
     const response = await mongoDb

@@ -5,10 +5,10 @@ const classSectionController = require("../controllers/class-sections");
 // GET routes
 // ============================================
 // get all class sections
-router.get("/", classSectionController.getAll);
+router.get("/", classSectionController.getAllCourseSections);
 
-// // get class section by section number
-router.get("/:sectionNumber", classSectionController.getById);
+// // get class section by sectionNumber
+router.get("/:sectionNumber", classSectionController.getBySectionNumber);
 
 // // ============================================
 // // POST route
@@ -25,7 +25,7 @@ router.get("/:sectionNumber", classSectionController.getById);
 // // ============================================
 // // DELETE route
 // // ============================================
-// // delete class section by section number
-router.delete("/:sectionNumber", classSectionController.deleteById);
+// // delete class section by sectionNumber
+router.delete("/:sectionNumber", classSectionController.deleteBySectionNumber);
 
 module.exports = router;

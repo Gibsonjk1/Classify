@@ -7,8 +7,8 @@ const studentsController = require("../controllers/students");
 // get all students
 router.get("/", studentsController.getAll);
 
-// // get student by id
-router.get("/:studentId", studentsController.getById);
+// // get student by studentId
+router.get("/:studentId", studentsController.getByStudentId);
 
 // // ============================================
 // // POST route
@@ -25,7 +25,7 @@ router.get("/:studentId", studentsController.getById);
 // // ============================================
 // // DELETE route
 // // ============================================
-// // delete student by id
-// router.delete("/:id", studentsController.deleteClassSection);
+// // delete student by studentId
+router.delete("/:studentId", studentsController.deleteByStudentId);
 
 module.exports = router;

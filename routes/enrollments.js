@@ -26,6 +26,6 @@ router.get("/:_id", enrollmentsController.getById);
 // // DELETE route
 // // ============================================
 // // delete enrollment by id
-// router.delete("/:id", enrollmentsController.deleteClassSection);
+router.delete("/:_id", enrollmentsController.deleteById);
 
 module.exports = router;

@@ -26,6 +26,6 @@ router.get("/:semesterId", semestersController.getById);
 // // DELETE route
 // // ============================================
 // // delete semester by id
-// router.delete("/:id", semestersController.deleteClassSection);
+router.delete("/:_id", semestersController.deleteById);
 
 module.exports = router;

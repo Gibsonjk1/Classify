@@ -8,7 +8,7 @@ const teachersController = require("../controllers/teachers");
 router.get("/", teachersController.getAll);
 
 // // get teacher by id
-router.get("/:teacherId", teachersController.getById);
+router.get("/:teacherId", teachersController.getByTeacherId);
 
 // // ============================================
 // // POST route
@@ -25,7 +25,7 @@ router.get("/:teacherId", teachersController.getById);
 // // ============================================
 // // DELETE route
 // // ============================================
-// // delete teacher by id
-// router.delete("/:id", teachersController.deleteClassSection);
+// // delete teacher by teacherId
+router.delete("/:teacherId", teachersController.deleteByTeacherId);
 
 module.exports = router;

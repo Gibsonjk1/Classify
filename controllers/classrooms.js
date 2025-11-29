@@ -1,13 +1,12 @@
 // imports
 const mongoDb = require("../db/connection");
-const ObejctId = require("mongodb").ObjectId;
 const classroomsUtils = {};
 
 // ==============================================
 // GET logic
 // ==============================================
 // get all classrooms
-classroomsUtils.getAll = async (req, res, next) => {
+classroomsUtils.getAllClassrooms = async (req, res, next) => {
   const result = mongoDb.getDb().db("Classify").collection("classrooms").find();
   const classrooms = await result.toArray();
   res.setHeader("content-type", "application/json");
@@ -15,8 +14,8 @@ classroomsUtils.getAll = async (req, res, next) => {
   res.json(classrooms);
 };
 
-// get classroom by room number
-classroomsUtils.getById = async (req, res, next) => {
+// get classroom by roomNumber
+classroomsUtils.getByRoomNumber = async (req, res, next) => {
   try {
     const roomNumber = req.params.roomNumber;
     const result = mongoDb
@@ -66,8 +65,8 @@ classroomsUtils.updateClassrooms = async (req, res) => {
 // ==============================================
 // DELETE logic
 // ==============================================
-// delete classroom by room number
-classroomsUtils.deleteById = async (req, res) => {
+// delete classroom by roomNumber
+classroomsUtils.deleteByRoomNumber = async (req, res) => {
   try {
     const roomNumber = req.params.roomNumber;
     const response = await mongoDb
@@ -88,7 +87,9 @@ classroomsUtils.deleteById = async (req, res) => {
     } else {
       res
         .status(500)
-        .json(error.message || "Some error occured while deleting the classroom.");
+        .json(
+          error.message || "Some error occured while deleting the classroom."
+        );
     }
   }
 };

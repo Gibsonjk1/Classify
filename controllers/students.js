@@ -7,19 +7,15 @@ const studentsUtils = {};
 // ==============================================
 // get all students
 studentsUtils.getAll = async (req, res, next) => {
-  const result = mongoDb
-    .getDb()
-    .db("Classify")
-    .collection("students")
-    .find();
+  const result = mongoDb.getDb().db("Classify").collection("students").find();
   const students = await result.toArray();
   res.setHeader("content-type", "application/json");
   res.status(200);
   res.json(students);
 };
 
-// get student by id
-studentsUtils.getById = async (req, res, next) => {
+// get student by studentId
+studentsUtils.getByStudentId = async (req, res, next) => {
   try {
     const studentId = req.params.studentId;
     const result = mongoDb
@@ -69,9 +65,33 @@ studentsUtils.updateStudents = async (req, res) => {
 // ==============================================
 // DELETE logic
 // ==============================================
-// delete student by id
-studentsUtils.deleteStudents = async (req, res) => {
-  // deleteStudents logic
+// delete student by studentId
+studentsUtils.deleteByStudentId = async (req, res) => {
+  try {
+    const studentId = req.params.studentId;
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("students")
+      .deleteOne({ studentId: studentId }, true);
+    if (response.deletedCount > 0) {
+      res.status(204).send();
+    } else {
+      const error = new Error("student id does not exist");
+      error.name = "no such id";
+      throw error;
+    }
+  } catch (error) {
+    if ((error.name = "no such id")) {
+      res.status(404).json(error.message);
+    } else {
+      res
+        .status(500)
+        .json(
+          error.message || "Some error occured while deleting the student."
+        );
+    }
+  }
 };
 
 module.exports = studentsUtils;

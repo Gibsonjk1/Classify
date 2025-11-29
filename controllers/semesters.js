@@ -66,8 +66,32 @@ semestersUtils.updateSemesters = async (req, res) => {
 // DELETE logic
 // ==============================================
 // delete semester by id
-semestersUtils.deleteSemesters = async (req, res) => {
-  // deleteSemesters logic
+semestersUtils.deleteById = async (req, res) => {
+  try {
+    const semesterId = req.params._id;
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("semesters")
+      .deleteOne({ _id: semesterId }, true);
+    if (response.deletedCount > 0) {
+      res.status(204).send();
+    } else {
+      const error = new Error("semester id does not exist");
+      error.name = "no such id";
+      throw error;
+    }
+  } catch (error) {
+    if ((error.name = "no such id")) {
+      res.status(404).json(error.message);
+    } else {
+      res
+        .status(500)
+        .json(
+          error.message || "Some error occured while deleting the semester."
+        );
+    }
+  }
 };
 
 module.exports = semestersUtils;

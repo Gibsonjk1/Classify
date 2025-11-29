@@ -5,10 +5,10 @@ const classesController = require("../controllers/classes");
 // GET routes
 // ============================================
 // get all classes
-router.get("/", classesController.getAll);
+router.get("/", classesController.getAllClasses);
 
-// // get class by id
-router.get("/:courseCode", classesController.getById);
+// // get class courseCode
+router.get("/:courseCode", classesController.getByCourseCode);
 
 // // ============================================
 // // POST route
@@ -25,7 +25,7 @@ router.get("/:courseCode", classesController.getById);
 // // ============================================
 // // DELETE route
 // // ============================================
-// // delete class by course code
-router.delete("/:courseCode", classesController.deleteById);
+// // delete class by courseCode
+router.delete("/:courseCode", classesController.deleteByCourseCode);
 
 module.exports = router;

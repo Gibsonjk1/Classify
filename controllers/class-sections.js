@@ -7,7 +7,7 @@ const classSectionsUtils = {};
 // GET logic
 // ==============================================
 // get all class sections
-classSectionsUtils.getAll = async (req, res, next) => {
+classSectionsUtils.getAllCourseSections = async (req, res, next) => {
   try {
     const result = mongoDb
       .getDb()
@@ -27,8 +27,8 @@ classSectionsUtils.getAll = async (req, res, next) => {
   }
 };
 
-// get class section by section number
-classSectionsUtils.getById = async (req, res, next) => {
+// get class section by sectionNumber
+classSectionsUtils.getBySectionNumber = async (req, res, next) => {
   try {
     const sectionNumber = req.params.sectionNumber;
     const result = mongoDb
@@ -79,8 +79,8 @@ classSectionsUtils.updateClassSection = async (req, res) => {
 // ==============================================
 // DELETE logic
 // ==============================================
-// delete class section by section number
-classSectionsUtils.deleteById = async (req, res) => {
+// delete class section by sectionNumber
+classSectionsUtils.deleteBySectionNumber = async (req, res) => {
   try {
     const sectionNumber = req.params.sectionNumber;
     const response = await mongoDb
