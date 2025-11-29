@@ -21,7 +21,7 @@ enrollmentsUtils.getAll = async (req, res, next) => {
 
 // get enrollment by id
 enrollmentsUtils.getById = async (req, res, next) => {
-  // getById logic
+  // logic here
 };
 
 // ==============================================

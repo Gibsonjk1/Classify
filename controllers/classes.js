@@ -8,11 +8,7 @@ const classesUtils = {};
 // ==============================================
 // get all classes
 classesUtils.getAll = async (req, res, next) => {
-  const result = mongoDb
-    .getDb()
-    .db("Classify")
-    .collection("classes")
-    .find();
+  const result = mongoDb.getDb().db("Classify").collection("classes").find();
   const classes = await result.toArray();
   res.setHeader("content-type", "application/json");
   res.status(200);
@@ -21,7 +17,7 @@ classesUtils.getAll = async (req, res, next) => {
 
 // get class by id
 classesUtils.getById = async (req, res, next) => {
-  // getById logic
+  // logic here
 };
 
 // ==============================================

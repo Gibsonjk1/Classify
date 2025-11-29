@@ -5,6 +5,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST;
 const mongodb = require("./db/connection");
 
 // Connect to MongoDB, First thing
@@ -31,10 +32,13 @@ mongodb.initDb((err, db) => {
       .use("/", require("./routes/index"))
       .use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-    const [hostId, portId, schemeId] = config.checkEnv();
     // Start server after everything is set up
-    app.listen(portId, () => {
-      console.log(`Server running at ${schemeId}://${hostId}:${portId}`);
+    app.listen(PORT, () => {
+      if (config.checkEnvironment() === "development") {
+        console.log("Server is running on http://localhost:3000/api-docs");
+      } else {
+        console.log(`Server is running on https://${HOST}:${PORT}`);
+      }
     });
   }
 });

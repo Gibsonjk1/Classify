@@ -8,11 +8,7 @@ const semestersUtils = {};
 // ==============================================
 // get all semesters
 semestersUtils.getAll = async (req, res, next) => {
-  const result = mongoDb
-    .getDb()
-    .db("Classify")
-    .collection("semesters")
-    .find();
+  const result = mongoDb.getDb().db("Classify").collection("semesters").find();
   const semesters = await result.toArray();
   res.setHeader("content-type", "application/json");
   res.status(200);
@@ -21,7 +17,7 @@ semestersUtils.getAll = async (req, res, next) => {
 
 // get semester by id
 semestersUtils.getById = async (req, res, next) => {
-  // getById logic
+  // logic here
 };
 
 // ==============================================
