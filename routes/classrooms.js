@@ -5,27 +5,27 @@ const classroomsController = require("../controllers/classrooms");
 // GET routes
 // ============================================
 // get all classrooms
-router.get("/", classroomsController.getAllClassrooms);
+router.get("/", /* #swagger.tags = ['Classrooms'] */ classroomsController.getAllClassrooms);
 
 // // get classroom by roomNumber
-router.get("/:roomNumber", classroomsController.getByRoomNumber);
+router.get("/:roomNumber", /* #swagger.tags = ['Classrooms'] */ classroomsController.getByRoomNumber);
 
 // // ============================================
 // // POST route
 // // ============================================
 // // add classroom
-router.post("/", classroomsController.insertClassroom);
+router.post("/", /* #swagger.tags = ['Classrooms'] */ classroomsController.insertClassroom);
 
-// // ============================================
-// // PUT route
-// // ============================================
-// // update classroom by id
-// router.put(":/id", classroomsController.updateClassSection);
+// ============================================
+// PUT route
+// ============================================
+// update classroom by roomNumber
+router.put("/:roomNumber", /* #swagger.tags = ['Classrooms'] */ classroomsController.updateClassroom);
 
 // // ============================================
 // // DELETE route
 // // ============================================
 // // delete classroom by roomNumber
-router.delete("/:roomNumber", classroomsController.deleteByRoomNumber);
+router.delete("/:roomNumber", /* #swagger.tags = ['Classrooms'] */ classroomsController.deleteByRoomNumber);
 
 module.exports = router;

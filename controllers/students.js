@@ -52,39 +52,76 @@ studentsUtils.getByStudentId = async (req, res, next) => {
 // add student
 studentsUtils.insertStudent = async (req, res) => {
   try {
-      const student = {
-        _id: req.body._id,
-        studentId: req.body.studentId,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        major: req.body.major,
-        createdAt: req.body.createdAt
-      };
-      const response = await mongoDb
-        .getDb()
-        .db("Classify")
-        .collection("students")
-        .insertOne(student);
-      // validation function goes here
-      if (response.acknowledged) {
-        res.status(201).json(response);
-      }
-    } catch (error) {
-      res
-        .status(500)
-        .json(
-          error.message || "Some error occured while inserting the student."
-        );
+    const student = {
+      _id: req.body._id,
+      studentId: req.body.studentId,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      major: req.body.major,
+      createdAt: req.body.createdAt
+    };
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("students")
+      .insertOne(student);
+    // validation function goes here
+    if (response.acknowledged) {
+      res.status(201).json(response);
     }
+  } catch (error) {
+    res
+      .status(500)
+      .json(
+        error.message || "Some error occured while inserting the student."
+      );
+  }
 };
 
 // ==============================================
 // PUT logic
 // ==============================================
-// update student by id
-studentsUtils.updateStudents = async (req, res) => {
-  // updateStudents logic
+// update student by studentId
+studentsUtils.updateStudent = async (req, res) => {
+  try {
+    const studentId = req.params.studentId;
+    const updateData = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      major: req.body.major
+    };
+
+    // Remove undefined fields
+    Object.keys(updateData).forEach(key =>
+      updateData[key] === undefined && delete updateData[key]
+    );
+
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("students")
+      .updateOne({ studentId: studentId }, { $set: updateData });
+
+    if (response.matchedCount > 0) {
+      res.status(204).send();
+    } else {
+      const error = new Error("Student id does not exist");
+      error.name = "no such id";
+      throw error;
+    }
+  } catch (error) {
+    if (error.name === "no such id") {
+      res.status(404).json(error.message);
+    } else {
+      res
+        .status(500)
+        .json(
+          error.message || "Some error occurred while updating the student."
+        );
+    }
+  }
 };
 
 // ==============================================

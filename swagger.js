@@ -7,10 +7,8 @@ const doc = {
     title: "classify",
     description: "CSE 341 final project",
   },
-  // host: "localhost:3000",
-  // schemes: ["http"],
-  host: "classify-yx4j.onrender.com",
-  schemes: ["https"],
+  host: process.env.HOST || "localhost:3000",
+  schemes: process.env.HOST ? ["https"] : ["http"],
 };
 
 const outputFile = "./swagger.json";

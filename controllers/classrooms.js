@@ -79,9 +79,44 @@ classroomsUtils.insertClassroom = async (req, res) => {
 // ==============================================
 // PUT logic
 // ==============================================
-// update classroom by id
-classroomsUtils.updateClassrooms = async (req, res) => {
-  // updateClassrooms logic
+// update classroom by roomNumber
+classroomsUtils.updateClassroom = async (req, res) => {
+  try {
+    const roomNumber = req.params.roomNumber;
+    const updateData = {
+      building: req.body.building,
+      capacity: req.body.capacity
+    };
+
+    // Remove undefined fields
+    Object.keys(updateData).forEach(key =>
+      updateData[key] === undefined && delete updateData[key]
+    );
+
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("classrooms")
+      .updateOne({ roomNumber: roomNumber }, { $set: updateData });
+
+    if (response.matchedCount > 0) {
+      res.status(204).send();
+    } else {
+      const error = new Error("Room number does not exist");
+      error.name = "no such id";
+      throw error;
+    }
+  } catch (error) {
+    if (error.name === "no such id") {
+      res.status(404).json(error.message);
+    } else {
+      res
+        .status(500)
+        .json(
+          error.message || "Some error occurred while updating the classroom."
+        );
+    }
+  }
 };
 
 // ==============================================

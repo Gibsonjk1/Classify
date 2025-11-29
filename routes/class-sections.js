@@ -5,27 +5,27 @@ const classSectionController = require("../controllers/class-sections");
 // GET routes
 // ============================================
 // get all class sections
-router.get("/", classSectionController.getAllCourseSections);
+router.get("/", /* #swagger.tags = ['Class Sections'] */ classSectionController.getAllCourseSections);
 
 // // get class section by sectionNumber
-router.get("/:sectionNumber", classSectionController.getBySectionNumber);
+router.get("/:sectionNumber", /* #swagger.tags = ['Class Sections'] */ classSectionController.getBySectionNumber);
 
 // // ============================================
 // // POST route
 // // ============================================
 // // add class section
-router.post("/", classSectionController.insertClassSection);
+router.post("/", /* #swagger.tags = ['Class Sections'] */ classSectionController.insertClassSection);
 
-// // ============================================
-// // PUT route
-// // ============================================
-// // update class section by id
-// router.put("/:id", classSectionController.updateClassSection);
+// ============================================
+// PUT route
+// ============================================
+// update class section by sectionNumber
+router.put("/:sectionNumber", /* #swagger.tags = ['Class Sections'] */ classSectionController.updateClassSection);
 
 // // ============================================
 // // DELETE route
 // // ============================================
 // // delete class section by sectionNumber
-router.delete("/:sectionNumber", classSectionController.deleteBySectionNumber);
+router.delete("/:sectionNumber", /* #swagger.tags = ['Class Sections'] */ classSectionController.deleteBySectionNumber);
 
 module.exports = router;

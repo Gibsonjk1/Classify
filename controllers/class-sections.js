@@ -54,7 +54,7 @@ classSectionsUtils.getBySectionNumber = async (req, res, next) => {
         .status(500)
         .json(
           error.message ||
-            "An error occured while retrieving the section number."
+          "An error occured while retrieving the section number."
         );
     }
   }
@@ -97,9 +97,48 @@ classSectionsUtils.insertClassSection = async (req, res) => {
 // ==============================================
 // PUT logic
 // ==============================================
-// update class section by id
+// update class section by sectionNumber
 classSectionsUtils.updateClassSection = async (req, res) => {
-  // updateClassSection logic
+  try {
+    const sectionNumber = req.params.sectionNumber;
+    const updateData = {
+      classId: req.body.classId,
+      semester: req.body.semester,
+      teacherId: req.body.teacherId,
+      classroomId: req.body.classroomId,
+      meetingTimes: req.body.meetingTimes,
+      capacity: req.body.capacity
+    };
+
+    // Remove undefined fields
+    Object.keys(updateData).forEach(key =>
+      updateData[key] === undefined && delete updateData[key]
+    );
+
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("class-sections")
+      .updateOne({ sectionNumber: sectionNumber }, { $set: updateData });
+
+    if (response.matchedCount > 0) {
+      res.status(204).send();
+    } else {
+      const error = new Error("Section number does not exist");
+      error.name = "no such id";
+      throw error;
+    }
+  } catch (error) {
+    if (error.name === "no such id") {
+      res.status(404).json(error.message);
+    } else {
+      res
+        .status(500)
+        .json(
+          error.message || "Some error occurred while updating the class section."
+        );
+    }
+  }
 };
 
 // ==============================================

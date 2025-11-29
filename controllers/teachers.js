@@ -52,38 +52,75 @@ teachersUtils.getByTeacherId = async (req, res, next) => {
 // add teacher
 teachersUtils.insertTeacher = async (req, res) => {
   try {
-        const teacher = {
-          _id: req.body._id,
-          teacherId: req.body.teacherId,
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          email: req.body.email,
-          departments: req.body.departments
-        };
-        const response = await mongoDb
-          .getDb()
-          .db("Classify")
-          .collection("teachers")
-          .insertOne(teacher);
-        // validation function goes here
-        if (response.acknowledged) {
-          res.status(201).json(response);
-        }
-      } catch (error) {
-        res
-          .status(500)
-          .json(
-            error.message || "Some error occured while inserting the teacher."
-          );
-      }
+    const teacher = {
+      _id: req.body._id,
+      teacherId: req.body.teacherId,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      departments: req.body.departments
+    };
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("teachers")
+      .insertOne(teacher);
+    // validation function goes here
+    if (response.acknowledged) {
+      res.status(201).json(response);
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json(
+        error.message || "Some error occured while inserting the teacher."
+      );
+  }
 };
 
 // ==============================================
 // PUT logic
 // ==============================================
-// update teacher by id
-teachersUtils.updateTeachers = async (req, res) => {
-  // updateTeachers logic
+// update teacher by teacherId
+teachersUtils.updateTeacher = async (req, res) => {
+  try {
+    const teacherId = req.params.teacherId;
+    const updateData = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      departments: req.body.departments
+    };
+
+    // Remove undefined fields
+    Object.keys(updateData).forEach(key =>
+      updateData[key] === undefined && delete updateData[key]
+    );
+
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("teachers")
+      .updateOne({ teacherId: teacherId }, { $set: updateData });
+
+    if (response.matchedCount > 0) {
+      res.status(204).send();
+    } else {
+      const error = new Error("Teacher id does not exist");
+      error.name = "no such id";
+      throw error;
+    }
+  } catch (error) {
+    if (error.name === "no such id") {
+      res.status(404).json(error.message);
+    } else {
+      res
+        .status(500)
+        .json(
+          error.message || "Some error occurred while updating the teacher."
+        );
+    }
+  }
 };
 
 // ==============================================

@@ -5,27 +5,27 @@ const classesController = require("../controllers/classes");
 // GET routes
 // ============================================
 // get all classes
-router.get("/", classesController.getAllClasses);
+router.get("/", /* #swagger.tags = ['Classes'] */ classesController.getAllClasses);
 
 // // get class courseCode
-router.get("/:courseCode", classesController.getByCourseCode);
+router.get("/:courseCode", /* #swagger.tags = ['Classes'] */ classesController.getByCourseCode);
 
 // // ============================================
 // // POST route
 // // ============================================
 // // add class
-router.post("/", classesController.insertClass);
+router.post("/", /* #swagger.tags = ['Classes'] */ classesController.insertClass);
 
-// // ============================================
-// // PUT route
-// // ============================================
-// // update class by id
-// router.put(":/id", classesController.updateClassSection);
+// ============================================
+// PUT route
+// ============================================
+// update class by courseCode
+router.put("/:courseCode", /* #swagger.tags = ['Classes'] */ classesController.updateClass);
 
 // // ============================================
 // // DELETE route
 // // ============================================
 // // delete class by courseCode
-router.delete("/:courseCode", classesController.deleteByCourseCode);
+router.delete("/:courseCode", /* #swagger.tags = ['Classes'] */ classesController.deleteByCourseCode);
 
 module.exports = router;

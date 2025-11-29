@@ -17,7 +17,7 @@ semestersUtils.getAll = async (req, res, next) => {
 // get semester by id
 semestersUtils.getById = async (req, res, next) => {
   try {
-    const semesterId = req.params.semesterId;
+    const semesterId = req.params._id;
     const result = mongoDb
       .getDb()
       .db("Classify")
@@ -52,39 +52,78 @@ semestersUtils.getById = async (req, res, next) => {
 // add semester
 semestersUtils.insertSemester = async (req, res) => {
   try {
-      const semester = {
-        _id: req.body._id,
-        name: req.body.name,
-        year: req.body.year,
-        term: req.body.term,
-        startDate: req.body.startDate,
-        endDate: req.body.endDate,
-        active: req.body.active
-      };
-      const response = await mongoDb
-        .getDb()
-        .db("Classify")
-        .collection("semesters")
-        .insertOne(semester);
-      // validation function goes here
-      if (response.acknowledged) {
-        res.status(201).json(response);
-      }
-    } catch (error) {
-      res
-        .status(500)
-        .json(
-          error.message || "Some error occured while inserting the semester."
-        );
+    const semester = {
+      _id: req.body._id,
+      name: req.body.name,
+      year: req.body.year,
+      term: req.body.term,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      active: req.body.active
+    };
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("semesters")
+      .insertOne(semester);
+    // validation function goes here
+    if (response.acknowledged) {
+      res.status(201).json(response);
     }
+  } catch (error) {
+    res
+      .status(500)
+      .json(
+        error.message || "Some error occured while inserting the semester."
+      );
+  }
 };
 
 // ==============================================
 // PUT logic
 // ==============================================
 // update semester by id
-semestersUtils.updateSemesters = async (req, res) => {
-  // updateSemesters logic
+semestersUtils.updateSemester = async (req, res) => {
+  try {
+    const semesterId = req.params._id;
+    const updateData = {
+      name: req.body.name,
+      year: req.body.year,
+      term: req.body.term,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      active: req.body.active
+    };
+
+    // Remove undefined fields
+    Object.keys(updateData).forEach(key =>
+      updateData[key] === undefined && delete updateData[key]
+    );
+
+    const response = await mongoDb
+      .getDb()
+      .db("Classify")
+      .collection("semesters")
+      .updateOne({ _id: semesterId }, { $set: updateData });
+
+    if (response.matchedCount > 0) {
+      res.status(204).send();
+    } else {
+      const error = new Error("Semester id does not exist");
+      error.name = "no such id";
+      throw error;
+    }
+  } catch (error) {
+    if (error.name === "no such id") {
+      res.status(404).json(error.message);
+    } else {
+      res
+        .status(500)
+        .json(
+          error.message || "Some error occurred while updating the semester."
+        );
+    }
+  }
 };
 
 // ==============================================

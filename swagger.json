@@ -5,10 +5,10 @@
     "description": "CSE 341 final project",
     "version": "1.0.0"
   },
-  "host": "classify-yx4j.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/": {
@@ -33,6 +33,9 @@
     },
     "/class-sections/": {
       "get": {
+        "tags": [
+          "Class Sections"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -47,6 +50,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Class Sections"
+        ],
         "description": "",
         "parameters": [
           {
@@ -95,6 +101,9 @@
     },
     "/class-sections/{sectionNumber}": {
       "get": {
+        "tags": [
+          "Class Sections"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -122,7 +131,62 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "Class Sections"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "sectionNumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "classId": {
+                  "example": "any"
+                },
+                "semester": {
+                  "example": "any"
+                },
+                "teacherId": {
+                  "example": "any"
+                },
+                "classroomId": {
+                  "example": "any"
+                },
+                "meetingTimes": {
+                  "example": "any"
+                },
+                "capacity": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "delete": {
+        "tags": [
+          "Class Sections"
+        ],
         "description": "",
         "parameters": [
           {
@@ -147,6 +211,9 @@
     },
     "/classes/": {
       "get": {
+        "tags": [
+          "Classes"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -158,6 +225,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Classes"
+        ],
         "description": "",
         "parameters": [
           {
@@ -197,6 +267,9 @@
     },
     "/classes/{courseCode}": {
       "get": {
+        "tags": [
+          "Classes"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -224,7 +297,53 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "Classes"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "courseCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "credits": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "delete": {
+        "tags": [
+          "Classes"
+        ],
         "description": "",
         "parameters": [
           {
@@ -249,6 +368,9 @@
     },
     "/classrooms/": {
       "get": {
+        "tags": [
+          "Classrooms"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -260,6 +382,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Classrooms"
+        ],
         "description": "",
         "parameters": [
           {
@@ -296,6 +421,9 @@
     },
     "/classrooms/{roomNumber}": {
       "get": {
+        "tags": [
+          "Classrooms"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -323,7 +451,50 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "Classrooms"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "roomNumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "building": {
+                  "example": "any"
+                },
+                "capacity": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "delete": {
+        "tags": [
+          "Classrooms"
+        ],
         "description": "",
         "parameters": [
           {
@@ -348,6 +519,9 @@
     },
     "/teachers/": {
       "get": {
+        "tags": [
+          "Teachers"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -359,6 +533,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Teachers"
+        ],
         "description": "",
         "parameters": [
           {
@@ -401,6 +578,9 @@
     },
     "/teachers/{teacherId}": {
       "get": {
+        "tags": [
+          "Teachers"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -428,7 +608,56 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "Teachers"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "teacherId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "example": "any"
+                },
+                "lastName": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "departments": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "delete": {
+        "tags": [
+          "Teachers"
+        ],
         "description": "",
         "parameters": [
           {
@@ -453,6 +682,9 @@
     },
     "/students/": {
       "get": {
+        "tags": [
+          "Students"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -464,6 +696,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Students"
+        ],
         "description": "",
         "parameters": [
           {
@@ -509,6 +744,9 @@
     },
     "/students/{studentId}": {
       "get": {
+        "tags": [
+          "Students"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -536,7 +774,56 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "Students"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "studentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "example": "any"
+                },
+                "lastName": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "major": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "delete": {
+        "tags": [
+          "Students"
+        ],
         "description": "",
         "parameters": [
           {
@@ -561,6 +848,9 @@
     },
     "/enrollments/": {
       "get": {
+        "tags": [
+          "Enrollments"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -572,6 +862,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Enrollments"
+        ],
         "description": "",
         "parameters": [
           {
@@ -614,6 +907,9 @@
     },
     "/enrollments/{_id}": {
       "get": {
+        "tags": [
+          "Enrollments"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -641,7 +937,56 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "Enrollments"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "studentId": {
+                  "example": "any"
+                },
+                "sectionId": {
+                  "example": "any"
+                },
+                "status": {
+                  "example": "any"
+                },
+                "grade": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "delete": {
+        "tags": [
+          "Enrollments"
+        ],
         "description": "",
         "parameters": [
           {
@@ -666,6 +1011,9 @@
     },
     "/semesters/": {
       "get": {
+        "tags": [
+          "Semesters"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -677,6 +1025,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Semesters"
+        ],
         "description": "",
         "parameters": [
           {
@@ -720,15 +1071,18 @@
         }
       }
     },
-    "/semesters/{semesterId}": {
+    "/semesters/{_id}": {
       "get": {
+        "tags": [
+          "Semesters"
+        ],
         "description": "",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "semesterId",
+            "name": "_id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -748,10 +1102,63 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/semesters/{_id}": {
+      },
+      "put": {
+        "tags": [
+          "Semesters"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "year": {
+                  "example": "any"
+                },
+                "term": {
+                  "example": "any"
+                },
+                "startDate": {
+                  "example": "any"
+                },
+                "endDate": {
+                  "example": "any"
+                },
+                "active": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "delete": {
+        "tags": [
+          "Semesters"
+        ],
         "description": "",
         "parameters": [
           {

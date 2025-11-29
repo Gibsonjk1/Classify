@@ -5,27 +5,27 @@ const semestersController = require("../controllers/semesters");
 // GET routes
 // ============================================
 // get all semesters
-router.get("/", semestersController.getAll);
+router.get("/", /* #swagger.tags = ['Semesters'] */ semestersController.getAll);
 
-// // get semester by id
-router.get("/:semesterId", semestersController.getById);
+// get semester by id
+router.get("/:_id", /* #swagger.tags = ['Semesters'] */ semestersController.getById);
 
 // // ============================================
 // // POST route
 // // ============================================
 // // add semester
-router.post("/", semestersController.insertSemester);
+router.post("/", /* #swagger.tags = ['Semesters'] */ semestersController.insertSemester);
 
-// // ============================================
-// // PUT route
-// // ============================================
-// // update semester by id
-// router.put(":/id", semestersController.updateClassSection);
+// ============================================
+// PUT route
+// ============================================
+// update semester by id
+router.put("/:_id", /* #swagger.tags = ['Semesters'] */ semestersController.updateSemester);
 
 // // ============================================
 // // DELETE route
 // // ============================================
 // // delete semester by id
-router.delete("/:_id", semestersController.deleteById);
+router.delete("/:_id", /* #swagger.tags = ['Semesters'] */ semestersController.deleteById);
 
 module.exports = router;

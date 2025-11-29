@@ -5,27 +5,27 @@ const teachersController = require("../controllers/teachers");
 // GET routes
 // ============================================
 // get all teachers
-router.get("/", teachersController.getAll);
+router.get("/", /* #swagger.tags = ['Teachers'] */ teachersController.getAll);
 
 // // get teacher by id
-router.get("/:teacherId", teachersController.getByTeacherId);
+router.get("/:teacherId", /* #swagger.tags = ['Teachers'] */ teachersController.getByTeacherId);
 
 // // ============================================
 // // POST route
 // // ============================================
 // // add teacher
-router.post("/", teachersController.insertTeacher);
+router.post("/", /* #swagger.tags = ['Teachers'] */ teachersController.insertTeacher);
 
-// // ============================================
-// // PUT route
-// // ============================================
-// // update teacher by id
-// router.put(":/id", teachersController.updateClassSection);
+// ============================================
+// PUT route
+// ============================================
+// update teacher by teacherId
+router.put("/:teacherId", /* #swagger.tags = ['Teachers'] */ teachersController.updateTeacher);
 
 // // ============================================
 // // DELETE route
 // // ============================================
 // // delete teacher by teacherId
-router.delete("/:teacherId", teachersController.deleteByTeacherId);
+router.delete("/:teacherId", /* #swagger.tags = ['Teachers'] */ teachersController.deleteByTeacherId);
 
 module.exports = router;
