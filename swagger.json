@@ -37,15 +37,9 @@
           "Class Sections"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -54,47 +48,9 @@
           "Class Sections"
         ],
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "_id": {
-                  "example": "any"
-                },
-                "classId": {
-                  "example": "any"
-                },
-                "sectionNumber": {
-                  "example": "any"
-                },
-                "semester": {
-                  "example": "any"
-                },
-                "teacherId": {
-                  "example": "any"
-                },
-                "classroomId": {
-                  "example": "any"
-                },
-                "meetingTimes": {
-                  "example": "any"
-                },
-                "capacity": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -105,9 +61,6 @@
           "Class Sections"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "sectionNumber",
@@ -117,17 +70,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -142,44 +86,11 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "classId": {
-                  "example": "any"
-                },
-                "semester": {
-                  "example": "any"
-                },
-                "teacherId": {
-                  "example": "any"
-                },
-                "classroomId": {
-                  "example": "any"
-                },
-                "meetingTimes": {
-                  "example": "any"
-                },
-                "capacity": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -197,14 +108,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -215,12 +120,9 @@
           "Classes"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -229,38 +131,9 @@
           "Classes"
         ],
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "_id": {
-                  "example": "any"
-                },
-                "courseCode": {
-                  "example": "any"
-                },
-                "title": {
-                  "example": "any"
-                },
-                "credits": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -271,9 +144,6 @@
           "Classes"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "courseCode",
@@ -283,17 +153,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -308,35 +169,11 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "example": "any"
-                },
-                "credits": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -354,14 +191,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -372,12 +203,9 @@
           "Classrooms"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -386,35 +214,9 @@
           "Classrooms"
         ],
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "_id": {
-                  "example": "any"
-                },
-                "building": {
-                  "example": "any"
-                },
-                "roomNumber": {
-                  "example": "any"
-                },
-                "capacity": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -425,9 +227,6 @@
           "Classrooms"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "roomNumber",
@@ -437,17 +236,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -462,32 +252,11 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "building": {
-                  "example": "any"
-                },
-                "capacity": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -505,14 +274,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -523,12 +286,9 @@
           "Teachers"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -537,41 +297,9 @@
           "Teachers"
         ],
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "_id": {
-                  "example": "any"
-                },
-                "teacherId": {
-                  "example": "any"
-                },
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "departments": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -582,9 +310,6 @@
           "Teachers"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "teacherId",
@@ -594,17 +319,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -619,38 +335,11 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "departments": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -668,14 +357,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -686,12 +369,9 @@
           "Students"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -700,44 +380,9 @@
           "Students"
         ],
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "_id": {
-                  "example": "any"
-                },
-                "studentId": {
-                  "example": "any"
-                },
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "major": {
-                  "example": "any"
-                },
-                "createdAt": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -748,9 +393,6 @@
           "Students"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "studentId",
@@ -760,17 +402,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -785,38 +418,11 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "major": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -834,14 +440,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -852,12 +452,9 @@
           "Enrollments"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -866,41 +463,9 @@
           "Enrollments"
         ],
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "_id": {
-                  "example": "any"
-                },
-                "studentId": {
-                  "example": "any"
-                },
-                "sectionId": {
-                  "example": "any"
-                },
-                "status": {
-                  "example": "any"
-                },
-                "enrolledAt": {
-                  "example": "any"
-                },
-                "grade": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -911,9 +476,6 @@
           "Enrollments"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "_id",
@@ -923,17 +485,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -948,38 +501,11 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "studentId": {
-                  "example": "any"
-                },
-                "sectionId": {
-                  "example": "any"
-                },
-                "status": {
-                  "example": "any"
-                },
-                "grade": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -997,14 +523,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -1015,12 +535,9 @@
           "Semesters"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -1029,44 +546,9 @@
           "Semesters"
         ],
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "_id": {
-                  "example": "any"
-                },
-                "name": {
-                  "example": "any"
-                },
-                "year": {
-                  "example": "any"
-                },
-                "term": {
-                  "example": "any"
-                },
-                "startDate": {
-                  "example": "any"
-                },
-                "endDate": {
-                  "example": "any"
-                },
-                "active": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -1077,9 +559,6 @@
           "Semesters"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "_id",
@@ -1089,17 +568,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -1114,44 +584,11 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "year": {
-                  "example": "any"
-                },
-                "term": {
-                  "example": "any"
-                },
-                "startDate": {
-                  "example": "any"
-                },
-                "endDate": {
-                  "example": "any"
-                },
-                "active": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -1169,14 +606,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       }

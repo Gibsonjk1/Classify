@@ -98,8 +98,8 @@ validate.semesterRules = () => {
         //semester year required rule
     body("year")
     .trim()
-  .escape()
   .notEmpty()
+  .withMessage("Year is required.")
   .isLength({ min: 4, max:4 })
   .isNumeric()
   .withMessage("Please provide a valid year."),
@@ -194,14 +194,14 @@ validate.classroomRules = () => {
   //capacity required rule
   body("capacity")
     .trim()
-    .escape()
     .notEmpty()
+    .withMessage("Capacity is required.")
     .isNumeric()
     .withMessage("Please provide a valid capacity number."),
     ]
 }
 
-validate.classroomRules = () => {
+validate.classRules = () => {
     return [
         //courseCode required rule
     body("courseCode")
@@ -217,6 +217,13 @@ validate.classroomRules = () => {
   .notEmpty()
   .isLength({ min: 5 })
   .withMessage("Course title is required."),
+  //credits required rule
+  body("credits")
+    .trim()
+    .notEmpty()
+    .withMessage("Credits are required.")
+    .isNumeric()
+    .withMessage("Please provide a valid number of credits."),
         //description required rule
     body("description")
     .trim()
@@ -268,21 +275,19 @@ validate.sectionRules = () => {
   body("meetingTimes")
     .trim()
   .escape()
-  .notEmpty()
-  .isArray()
-  .isLength({ min: 1 })
-  .withMessage("Meeting times are required."),
+    .notEmpty()
+    .isArray()
+    .isLength({ min: 1 })
+    .withMessage("Meeting times are required."),
   //capacity required rule
   body("capacity")
     .trim()
-    .escape()
     .notEmpty()
+    .withMessage("Capacity is required.")
     .isNumeric()
     .withMessage("Please provide a valid capacity number."),
     ]
-}
-
-/* ******************************
+}/* ******************************
  * Check data and return errors or continue
  * ***************************** */
 validate.checkData = async (req, res, next) => {
