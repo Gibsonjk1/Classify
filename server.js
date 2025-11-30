@@ -7,6 +7,16 @@ const swaggerDocument = require("./swagger.json");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST;
+
+// Update Swagger document with correct host at runtime
+if (HOST) {
+  swaggerDocument.host = HOST;
+  swaggerDocument.schemes = ["https"];
+} else {
+  swaggerDocument.host = "localhost:3000";
+  swaggerDocument.schemes = ["http"];
+}
+
 const mongodb = require("./db/connection");
 
 // Connect to MongoDB, First thing
