@@ -4,18 +4,18 @@ const { MongoClient } = require("mongodb");
 const config = require("./config");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
-const app = express();
-const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST;
 
 // Update Swagger document with correct host at runtime
-if (HOST) {
-  swaggerDocument.host = HOST;
-  swaggerDocument.schemes = ["https"];
-} else {
-  swaggerDocument.host = "localhost:3000";
+if (process.env.HOST) {
+  swaggerDocument.host = process.env.HOST;
+  swaggerDocument.schemes = ["https", "http"];
+} else if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+  swaggerDocument.host = `localhost:${process.env.PORT || 3000}`;
   swaggerDocument.schemes = ["http"];
 }
+
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 const mongodb = require("./db/connection");
 
@@ -45,11 +45,7 @@ mongodb.initDb((err, db) => {
 
     // Start server after everything is set up
     app.listen(PORT, () => {
-      if (config.checkEnvironment() === "development") {
-        console.log("Server is running on http://localhost:3000/api-docs");
-      } else {
-        console.log(`Server is running on https://${HOST}:${PORT}`);
-      }
+      console.log(`Server is running on port ${PORT}`);
     });
   }
 });

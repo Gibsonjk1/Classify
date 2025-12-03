@@ -1,4 +1,3 @@
-require("dotenv").config();
 const swaggerAutogen = require("swagger-autogen")();
 
 
@@ -7,8 +6,8 @@ const doc = {
     title: "classify",
     description: "CSE 341 final project",
   },
-  host: process.env.HOST || "localhost:3000",
-  schemes: process.env.HOST ? ["https"] : ["http"],
+  host: "classify-7nzc.onrender.com",
+  schemes: ["https", "http"],
 };
 
 const outputFile = "./swagger.json";
