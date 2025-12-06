@@ -30,7 +30,22 @@ const getDb = () => {
   return _db;
 };
 
+
+// Close the underlying MongoClient connection (useful for tests)
+const closeDb = async () => {
+  if (_db) {
+    try {
+      await _db.close();
+      _db = null;
+      console.log("MongoDB connection closed");
+    } catch (err) {
+      console.error("Error closing MongoDB connection:", err);
+    }
+  }
+};
+
 module.exports = {
   initDb,
   getDb,
+  closeDb,
 };
