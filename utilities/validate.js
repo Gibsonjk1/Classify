@@ -39,13 +39,13 @@ body("email")
 
 validate.teacherRules = () => {
     return [
-        //Student ID rules
+        //Teacher ID rules
     body("teacherId")
     .trim()
     .escape()
     .notEmpty()
     .isLength({ min: 1 })
-    .withMessage("Student ID is required"),
+    .withMessage("Teacher ID is required"),
         //firstname required rule
     body("firstName")
   .trim()
@@ -82,7 +82,7 @@ body("email")
 validate.semesterRules = () => {
     return [
         //semester rules
-    body("_id")
+    body("semester_id")
     .trim()
     .escape()
     .notEmpty()
