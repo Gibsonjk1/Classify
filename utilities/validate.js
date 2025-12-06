@@ -69,7 +69,7 @@ body("email")
   .normalizeEmail()
   .withMessage("A valid email is required."),
   // department required rule
-  body("department")
+  body("departments")
   .trim()
   .escape()
   .notEmpty()
