@@ -33,21 +33,21 @@ router.post(
   validator.checkData,
   /* #swagger.description = 'add class section by sectionId'
     #swagger.parameters['classSection'] = {
-        in: 'body',
-        description: 'Class section obejct',
-        required: true,
-        schema: {
-            sectionId: 'CSE212-001',
-            classId: 'CSE212',
-            semesterId: 'fall2025',
-            teacherId: 'T12345',
-            classroomId: 'CSB201',
-            meetingTimes: [
-            { "day": "Mon", "start": "10:00", "end": "11:15" },
-            { "day": "Wed", "start": "10:00", "end": "11:15" }
-            ],
-            capacity: 40
-        }
+      in: 'body',
+      description: 'Class section obejct',
+      required: true,
+      schema: {
+        sectionId: 'CSE212-001',
+        classId: 'CSE212',
+        semesterId: 'fall2025',
+        teacherId: 'T12345',
+        classroomId: 'CSB201',
+        meetingTimes: [
+        { "day": "Mon", "start": "10:00", "end": "11:15" },
+        { "day": "Wed", "start": "10:00", "end": "11:15" }
+        ],
+        capacity: 40
+      }
     } */
   utils.handleErrors(classSectionController.insertClassSection)
 );
@@ -63,21 +63,21 @@ router.put(
   validator.checkData,
   /* #swagger.description = 'update class section by sectionId'
     #swagger.parameters['classSection'] = {
-        in: 'body',
-        description: 'Class section obejct',
-        required: true,
-        schema: {
-            sectionId: 'CSE212-001',
-            classId: 'CSE212',
-            semesterId: 'fall2025',
-            teacherId: 'T12345',
-            classroomId: 'CSB201',
-            meetingTimes: [
-            { "day": "Mon", "start": "10:00", "end": "11:15" },
-            { "day": "Wed", "start": "10:00", "end": "11:15" }
-            ],
-            capacity: 40
-        }
+      in: 'body',
+      description: 'Class section obejct',
+      required: true,
+      schema: {
+        sectionId: 'CSE212-001',
+        classId: 'CSE212',
+        semesterId: 'fall2025',
+        teacherId: 'T12345',
+        classroomId: 'CSB201',
+        meetingTimes: [
+        { "day": "Mon", "start": "10:00", "end": "11:15" },
+        { "day": "Wed", "start": "10:00", "end": "11:15" }
+        ],
+        capacity: 40
+      }
     } */
   utils.handleErrors(classSectionController.updateClassSection)
 );

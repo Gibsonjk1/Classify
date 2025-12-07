@@ -6,7 +6,7 @@ const enrollmentsUtils = {};
 // GET logic
 // ==============================================
 // get all enrollments
-enrollmentsUtils.getAll = async (req, res, next) => {
+enrollmentsUtils.getAllEnrollments = async (req, res, next) => {
   const result = mongoDb
     .getDb()
     .db("Classify")
@@ -18,18 +18,18 @@ enrollmentsUtils.getAll = async (req, res, next) => {
   res.json(enrollments);
 };
 
-// get enrollment by id
-enrollmentsUtils.getById = async (req, res, next) => {
+// get enrollment by enrollmentId
+enrollmentsUtils.getEnrollmentById = async (req, res, next) => {
   try {
-    const _id = req.params._id;
+    const enrollmentId = req.params.enrollmentId;
     const result = mongoDb
       .getDb()
       .db("Classify")
       .collection("enrollments")
-      .find({ _id: _id });
+      .find({ enrollmentId: enrollmentId });
     const enrollment = await result.toArray();
     if (!enrollment.length > 0) {
-      const error = new Error("No data found with that enrollment id.");
+      const error = new Error("No data found with that enrollment ID.");
       error.name = "blank id";
       throw error;
     }
@@ -44,7 +44,7 @@ enrollmentsUtils.getById = async (req, res, next) => {
       res
         .status(500)
         .json(
-          error.message || "An error occured while retrieving the enrollment id."
+          error.message || "An error occured while retrieving the enrollment ID."
         );
     }
   }
@@ -57,12 +57,12 @@ enrollmentsUtils.getById = async (req, res, next) => {
 enrollmentsUtils.insertEnrollment = async (req, res) => {
   try {
     const enrollment = {
-      _id: req.body._id,
+      enrollmentId: req.body.enrollmentId,
       studentId: req.body.studentId,
-      sectionId: req.body.sectionId,
+      departmentId: req.body.departmentId,
       status: req.body.status,
       enrolledAt: req.body.enrolledAt,
-      grade: req.body.grade
+      gpa: req.body.gpa
     };
     const response = await mongoDb
       .getDb()
@@ -77,7 +77,7 @@ enrollmentsUtils.insertEnrollment = async (req, res) => {
     res
       .status(500)
       .json(
-        error.message || "Some error occured while inserting the enrollment."
+        error.message || "Some error occured while inserting the enrollment ID."
       );
   }
 };
@@ -85,15 +85,17 @@ enrollmentsUtils.insertEnrollment = async (req, res) => {
 // ==============================================
 // PUT logic
 // ==============================================
-// update enrollment by id
-enrollmentsUtils.updateEnrollment = async (req, res) => {
+// update enrollment by enrollmentId
+enrollmentsUtils.updateEnrollmentById = async (req, res) => {
   try {
-    const enrollmentId = req.params._id;
+    const enrollmentId = req.params.enrollmentId;
     const updateData = {
+      enrollmentId: req.body.enrollmentId,
       studentId: req.body.studentId,
-      sectionId: req.body.sectionId,
+      departmentId: req.body.departmentId,
       status: req.body.status,
-      grade: req.body.grade
+      enrolledAt: req.body.enrolledAt,
+      gpa: req.body.gpa
     };
 
     // Remove undefined fields
@@ -105,12 +107,12 @@ enrollmentsUtils.updateEnrollment = async (req, res) => {
       .getDb()
       .db("Classify")
       .collection("enrollments")
-      .updateOne({ _id: enrollmentId }, { $set: updateData });
+      .updateOne({ enrollmentId: enrollmentId }, { $set: updateData });
 
     if (response.matchedCount > 0) {
       res.status(204).send();
     } else {
-      const error = new Error("Enrollment id does not exist");
+      const error = new Error("Enrollment ID does not exist");
       error.name = "no such id";
       throw error;
     }
@@ -121,7 +123,7 @@ enrollmentsUtils.updateEnrollment = async (req, res) => {
       res
         .status(500)
         .json(
-          error.message || "Some error occurred while updating the enrollment."
+          error.message || "Some error occurred while updating the enrollment ID."
         );
     }
   }
@@ -130,19 +132,19 @@ enrollmentsUtils.updateEnrollment = async (req, res) => {
 // ==============================================
 // DELETE logic
 // ==============================================
-// delete enrollment by id
-enrollmentsUtils.deleteById = async (req, res) => {
+// delete enrollment by enrollmentId
+enrollmentsUtils.deleteEnrollmentById = async (req, res) => {
   try {
-    const enrollmentId = req.params._id;
+    const enrollmentId = req.params.enrollmentId;
     const response = await mongoDb
       .getDb()
       .db("Classify")
       .collection("enrollments")
-      .deleteOne({ _id: enrollmentId }, true);
+      .deleteOne({ enrollmentId: enrollmentId }, true);
     if (response.deletedCount > 0) {
       res.status(204).send();
     } else {
-      const error = new Error("enrollment id does not exist");
+      const error = new Error("Enrollment ID does not exist");
       error.name = "no such id";
       throw error;
     }
@@ -153,7 +155,7 @@ enrollmentsUtils.deleteById = async (req, res) => {
       res
         .status(500)
         .json(
-          error.message || "Some error occured while deleting the enrollment."
+          error.message || "Some error occured while deleting the enrollment ID."
         );
     }
   }

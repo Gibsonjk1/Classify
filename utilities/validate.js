@@ -146,20 +146,27 @@ validate.semesterRules = () => {
 
 validate.enrollmentRules = () => {
   return [
+    //enrollment ID rules
+    body("enrollmentId")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 15 })
+      .withMessage("Enrollment ID is required."),
     //student ID rules
     body("studentId")
       .trim()
       .escape()
       .notEmpty()
-      .isLength({ min: 1 })
+      .isLength({ min: 8 })
       .withMessage("Student ID is required."),
-    //section ID rules
-    body("sectionId")
+    //department ID rules
+    body("departmentId")
       .trim()
       .escape()
       .notEmpty()
-      .isLength({ min: 1 })
-      .withMessage("section ID is required."),
+      .isLength({ min: 2 })
+      .withMessage("Department ID is required."),
     //status required rule
     body("status")
       .trim()

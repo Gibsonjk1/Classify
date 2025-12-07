@@ -683,15 +683,52 @@
         "tags": [
           "Enrollments"
         ],
-        "description": "",
+        "description": "update enrollment by enrollmentId",
+        "parameters": [
+          {
+            "name": "enrollmentId",
+            "in": "body",
+            "description": "Enrollment ID obejct",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "enrollmentId": {
+                  "type": "string",
+                  "example": "MS0825SAL123456"
+                },
+                "studentId": {
+                  "type": "string",
+                  "example": "SAL123456"
+                },
+                "departmentId": {
+                  "type": "string",
+                  "example": "MATH"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "enrolled"
+                },
+                "enrolledAt": {
+                  "type": "string",
+                  "example": "2025-08-20T12:00:00Z"
+                },
+                "gpa": {
+                  "type": "number",
+                  "example": 3.3
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": ""
           }
         }
       }
     },
-    "/enrollments/{_id}": {
+    "/enrollments/{enrollmentId}": {
       "get": {
         "tags": [
           "Enrollments"
@@ -699,7 +736,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "_id",
+            "name": "enrollmentId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -715,18 +752,47 @@
         "tags": [
           "Enrollments"
         ],
-        "description": "",
+        "description": "update enrollment by enrollmentId",
         "parameters": [
           {
-            "name": "_id",
-            "in": "path",
+            "name": "enrollmentId",
+            "in": "body",
             "required": true,
-            "type": "string"
+            "description": "Enrollment ID obejct",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "enrollmentId": {
+                  "type": "string",
+                  "example": "MS0825SAL123456"
+                },
+                "studentId": {
+                  "type": "string",
+                  "example": "SAL123456"
+                },
+                "departmentId": {
+                  "type": "string",
+                  "example": "MATH"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "enrolled"
+                },
+                "enrolledAt": {
+                  "type": "string",
+                  "example": "2025-08-20T12:00:00Z"
+                },
+                "gpa": {
+                  "type": "number",
+                  "example": 3.3
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -737,7 +803,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "_id",
+            "name": "enrollmentId",
             "in": "path",
             "required": true,
             "type": "string"

@@ -15,7 +15,7 @@ classroomsUtils.getAllClassrooms = async (req, res, next) => {
 };
 
 // get classroom by classroomId
-classroomsUtils.getByClassroomId = async (req, res, next) => {
+classroomsUtils.getClassroomsById = async (req, res, next) => {
   try {
     const classroomId = req.params.classroomId;
     const result = mongoDb

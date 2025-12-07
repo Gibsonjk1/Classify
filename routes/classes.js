@@ -33,15 +33,15 @@ router.post(
   validator.checkData,
   /* #swagger.description = 'add class by classId'
     #swagger.parameters['classId'] = {
-        in: 'body',
-        description: 'Class ID obejct',
-        required: true,
-        schema: {
-            classId: 'MECH360',
-            title: 'Automotive Restoration',
-            credits: 3,
-            description: 'The restoration of vintage vehicles...'
-        }
+      in: 'body',
+      description: 'Class ID obejct',
+      required: true,
+      schema: {
+        classId: 'MECH360',
+        title: 'Automotive Restoration',
+        credits: 3,
+        description: 'The restoration of vintage vehicles...'
+      }
     } */
   utils.handleErrors(classesController.insertClass)
 );
@@ -57,15 +57,15 @@ router.put(
   validator.checkData,
   /* #swagger.description = 'update class by classId'
     #swagger.parameters['classId'] = {
-        in: 'body',
-        description: 'Class ID obejct',
-        required: true,
-        schema: {
-            classId: 'MECH360',
-            title: 'Automotive Restoration',
-            credits: 3,
-            description: 'The restoration of vintage vehicles...'
-        }
+      in: 'body',
+      description: 'Class ID obejct',
+      required: true,
+      schema: {
+        classId: 'MECH360',
+        title: 'Automotive Restoration',
+        credits: 3,
+        description: 'The restoration of vintage vehicles...'
+      }
     } */
   utils.handleErrors(classesController.updateClassById)
 );

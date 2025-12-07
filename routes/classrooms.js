@@ -18,7 +18,7 @@ router.get(
 router.get(
   "/:classroomId",
   /* #swagger.tags = ['Classrooms'] */ utils.handleErrors(
-    classroomsController.getByClassroomId
+    classroomsController.getClassroomsById
   )
 );
 
@@ -28,21 +28,21 @@ router.get(
 // // add classroom
 router.post(
   "/",
-  /* #swagger.tags = ['Classrooms'] */ 
+  /* #swagger.tags = ['Classrooms'] */
   validator.classroomRules(),
   validator.checkData,
   /* #swagger.description = 'add classroom by classroomId'
     #swagger.parameters['classroomId'] = {
-        in: 'body',
-        description: 'Classroom ID obejct',
-        required: true,
-        schema: {
-            classroomId: 'MECHB360',
-            roomNumber: '360',
-            buildingId: 'MECHB',
-            buidlingName: 'Mechanical Engineering',
-            capacity: 40
-        }
+      in: 'body',
+      description: 'Classroom ID obejct',
+      required: true,
+      schema: {
+        classroomId: 'MECHB360',
+        roomNumber: '360',
+        buildingId: 'MECHB',
+        buidlingName: 'Mechanical Engineering',
+        capacity: 40
+      }
     } */
   utils.handleErrors(classroomsController.insertClassroom)
 );
@@ -53,21 +53,21 @@ router.post(
 // update classroom by classroomId
 router.put(
   "/:classroomId",
-  /* #swagger.tags = ['Classrooms'] */ 
+  /* #swagger.tags = ['Classrooms'] */
   validator.classroomRules(),
   validator.checkData,
   /* #swagger.description = 'update classroom by classroomId'
     #swagger.parameters['classroomId'] = {
-        in: 'body',
-        description: 'Classroom ID obejct',
-        required: true,
-        schema: {
-            classroomId: 'MECHB360',
-            roomNumber: '360',
-            buildingId: 'MECHB',
-            buidlingName: 'Mechanical Engineering',
-            capacity: 40
-        }
+      in: 'body',
+      description: 'Classroom ID obejct',
+      required: true,
+      schema: {
+        classroomId: 'MECHB360',
+        roomNumber: '360',
+        buildingId: 'MECHB',
+        buidlingName: 'Mechanical Engineering',
+        capacity: 40
+      }
     } */
   utils.handleErrors(classroomsController.updateClassroomById)
 );
