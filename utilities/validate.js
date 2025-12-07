@@ -202,13 +202,13 @@ validate.classroomRules = () => {
 
 validate.classRules = () => {
   return [
-    //courseCode required rule
-    body("courseCode")
+    //classId required rule
+    body("classId")
       .trim()
       .escape()
       .notEmpty()
       .isLength({ min: 3 })
-      .withMessage("Course code is required."),
+      .withMessage("Class ID is required."),
     //Title required rule
     body("title")
       .trim()
@@ -229,7 +229,7 @@ validate.classRules = () => {
       .escape()
       .notEmpty()
       .isLength({ min: 10 })
-      .withMessage("Course description is required."),
+      .withMessage("Class description is required."),
   ];
 };
 

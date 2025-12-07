@@ -14,18 +14,18 @@ classesUtils.getAllClasses = async (req, res, next) => {
   res.json(classes);
 };
 
-// get class by courseCode
-classesUtils.getByCourseCode = async (req, res, next) => {
+// get class by classId
+classesUtils.getByClassId = async (req, res, next) => {
   try {
-    const courseCode = req.params.courseCode;
+    const classId = req.params.classId;
     const result = mongoDb
       .getDb()
       .db("Classify")
       .collection("classes")
-      .find({ courseCode: courseCode });
+      .find({ classId: classId });
     const _class = await result.toArray();
     if (!_class.length > 0) {
-      const error = new Error("No data found with that course code.");
+      const error = new Error("No data found with that class id.");
       error.name = "blank id";
       throw error;
     }
@@ -40,7 +40,7 @@ classesUtils.getByCourseCode = async (req, res, next) => {
       res
         .status(500)
         .json(
-          error.message || "An error occured while retrieving the course code."
+          error.message || "An error occured while retrieving the class id."
         );
     }
   }
@@ -53,8 +53,7 @@ classesUtils.getByCourseCode = async (req, res, next) => {
 classesUtils.insertClass = async (req, res) => {
   try {
     const _class = {
-      _id: req.body._id,
-      courseCode: req.body.courseCode,
+      classId: req.body.classId,
       title: req.body.title,
       credits: req.body.credits,
       description: req.body.description,
@@ -80,14 +79,15 @@ classesUtils.insertClass = async (req, res) => {
 // ==============================================
 // PUT logic
 // ==============================================
-// update class by courseCode
-classesUtils.updateClass = async (req, res) => {
+// update class by classId
+classesUtils.updateClassById = async (req, res) => {
   try {
-    const courseCode = req.params.courseCode;
+    const classId = req.params.classId;
     const updateData = {
+      classId: req.body.classId,
       title: req.body.title,
       credits: req.body.credits,
-      description: req.body.description
+      description: req.body.description,
     };
 
     // Remove undefined fields
@@ -99,12 +99,12 @@ classesUtils.updateClass = async (req, res) => {
       .getDb()
       .db("Classify")
       .collection("classes")
-      .updateOne({ courseCode: courseCode }, { $set: updateData });
+      .updateOne({ classId: classId }, { $set: updateData });
 
     if (response.matchedCount > 0) {
       res.status(204).send();
     } else {
-      const error = new Error("Course code does not exist");
+      const error = new Error("Class ID does not exist");
       error.name = "no such id";
       throw error;
     }
@@ -124,19 +124,19 @@ classesUtils.updateClass = async (req, res) => {
 // ==============================================
 // DELETE logic
 // ==============================================
-// delete class by courseCode
-classesUtils.deleteByCourseCode = async (req, res) => {
+// delete class by classId
+classesUtils.deleteByClassId = async (req, res) => {
   try {
-    const courseCode = req.params.courseCode;
+    const classId = req.params.classId;
     const response = await mongoDb
       .getDb()
       .db("Classify")
       .collection("classes")
-      .deleteOne({ courseCode: courseCode }, true);
+      .deleteOne({ classId: classId }, true);
     if (response.deletedCount > 0) {
       res.status(204).send();
     } else {
-      const error = new Error("class code does not exist");
+      const error = new Error("class ID does not exist");
       error.name = "no such id";
       throw error;
     }
