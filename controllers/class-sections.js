@@ -96,7 +96,7 @@ classSectionsUtils.insertClassSection = async (req, res) => {
 // ==============================================
 // PUT logic
 // ==============================================
-// update class section by sectionNumber
+// update class section by sectionId
 classSectionsUtils.updateClassSection = async (req, res) => {
   try {
     const sectionId = req.params.sectionId;
