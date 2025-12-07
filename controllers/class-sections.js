@@ -27,18 +27,18 @@ classSectionsUtils.getAllCourseSections = async (req, res, next) => {
   }
 };
 
-// get class section by sectionNumber
-classSectionsUtils.getBySectionNumber = async (req, res, next) => {
+// get class section by sectionId
+classSectionsUtils.getBySectionId = async (req, res, next) => {
   try {
-    const sectionNumber = req.params.sectionNumber;
+    const sectionId = req.params.sectionId;
     const result = mongoDb
       .getDb()
       .db("Classify")
       .collection("class-sections")
-      .find({ sectionNumber: sectionNumber });
+      .find({ sectionId: sectionId });
     const classSection = await result.toArray();
     if (!classSection.length > 0) {
-      const error = new Error("No data found with that section number.");
+      const error = new Error("No data found with that section id.");
       error.name = "blank id";
       throw error;
     }
@@ -54,7 +54,7 @@ classSectionsUtils.getBySectionNumber = async (req, res, next) => {
         .status(500)
         .json(
           error.message ||
-          "An error occured while retrieving the section number."
+          "An error occured while retrieving the section id."
         );
     }
   }
@@ -67,10 +67,9 @@ classSectionsUtils.getBySectionNumber = async (req, res, next) => {
 classSectionsUtils.insertClassSection = async (req, res) => {
   try {
     const classSection = {
-      _id: req.body._id,
+      sectionId: req.body.sectionId,
       classId: req.body.classId,
-      sectionNumber: req.body.sectionNumber,
-      semester: req.body.semester,
+      semesterId: req.body.semesterId,
       teacherId: req.body.teacherId,
       classroomId: req.body.classroomId,
       meetingTimes: req.body.meetingTimes,
@@ -97,17 +96,18 @@ classSectionsUtils.insertClassSection = async (req, res) => {
 // ==============================================
 // PUT logic
 // ==============================================
-// update class section by sectionNumber
+// update class section by sectionId
 classSectionsUtils.updateClassSection = async (req, res) => {
   try {
-    const sectionNumber = req.params.sectionNumber;
+    const sectionId = req.params.sectionId;
     const updateData = {
+      sectionId: req.body.sectionId,
       classId: req.body.classId,
-      semester: req.body.semester,
+      semesterId: req.body.semesterId,
       teacherId: req.body.teacherId,
       classroomId: req.body.classroomId,
       meetingTimes: req.body.meetingTimes,
-      capacity: req.body.capacity
+      capacity: req.body.capacity,
     };
 
     // Remove undefined fields
@@ -119,12 +119,12 @@ classSectionsUtils.updateClassSection = async (req, res) => {
       .getDb()
       .db("Classify")
       .collection("class-sections")
-      .updateOne({ sectionNumber: sectionNumber }, { $set: updateData });
+      .updateOne({ sectionId: sectionId }, { $set: updateData });
 
     if (response.matchedCount > 0) {
       res.status(204).send();
     } else {
-      const error = new Error("Section number does not exist");
+      const error = new Error("Section id does not exist");
       error.name = "no such id";
       throw error;
     }
@@ -135,7 +135,7 @@ classSectionsUtils.updateClassSection = async (req, res) => {
       res
         .status(500)
         .json(
-          error.message || "Some error occurred while updating the class section."
+          error.message || "Some error occurred while updating the section id."
         );
     }
   }
@@ -144,19 +144,19 @@ classSectionsUtils.updateClassSection = async (req, res) => {
 // ==============================================
 // DELETE logic
 // ==============================================
-// delete class section by sectionNumber
-classSectionsUtils.deleteBySectionNumber = async (req, res) => {
+// delete class section by sectionId
+classSectionsUtils.deleteBySectionId = async (req, res) => {
   try {
-    const sectionNumber = req.params.sectionNumber;
+    const sectionId = req.params.sectionId;
     const response = await mongoDb
       .getDb()
       .db("Classify")
       .collection("class-sections")
-      .deleteOne({ sectionNumber: sectionNumber }, true);
+      .deleteOne({ sectionId: sectionId }, true);
     if (response.deletedCount > 0) {
       res.status(204).send();
     } else {
-      const error = new Error("section number does not exist");
+      const error = new Error("section id does not exist");
       error.name = "no such id";
       throw error;
     }

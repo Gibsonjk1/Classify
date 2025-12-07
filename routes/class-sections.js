@@ -7,27 +7,90 @@ const validator = require("../utilities/validate");
 // GET routes
 // ============================================
 // get all class sections
-router.get("/", /* #swagger.tags = ['Class Sections'] */ utils.handleErrors(classSectionController.getAllCourseSections));
+router.get(
+  "/",
+  /* #swagger.tags = ['Class Sections'] */ utils.handleErrors(
+    classSectionController.getAllCourseSections
+  )
+);
 
-// // get class section by sectionNumber
-router.get("/:sectionNumber", /* #swagger.tags = ['Class Sections'] */ utils.handleErrors(classSectionController.getBySectionNumber));
+// // get class section by sectionId
+router.get(
+  "/:sectionId",
+  /* #swagger.tags = ['Class Sections'] */ utils.handleErrors(
+    classSectionController.getBySectionId
+  )
+);
 
 // // ============================================
 // // POST route
 // // ============================================
 // // add class section
-router.post("/", /* #swagger.tags = ['Class Sections'] */ validator.sectionRules(), validator.checkData, utils.handleErrors(classSectionController.insertClassSection));
+router.post(
+  "/",
+  /* #swagger.tags = ['Class Sections'] */
+  validator.sectionRules(),
+  validator.checkData,
+  /* #swagger.description = 'add class section by sectionId'
+    #swagger.parameters['classSection'] = {
+        in: 'body',
+        description: 'Class section obejct',
+        required: true,
+        schema: {
+            sectionId: 'CSE212-001',
+            classId: 'CSE212',
+            semesterId: 'fall2025',
+            teacherId: 'T12345',
+            classroomId: 'CSB201',
+            meetingTimes: [
+            { "day": "Mon", "start": "10:00", "end": "11:15" },
+            { "day": "Wed", "start": "10:00", "end": "11:15" }
+            ],
+            capacity: 40
+        }
+    } */
+  utils.handleErrors(classSectionController.insertClassSection)
+);
 
 // ============================================
 // PUT route
 // ============================================
-// update class section by sectionNumber
-router.put("/:sectionNumber", /* #swagger.tags = ['Class Sections'] */ validator.sectionRules(), validator.checkData, utils.handleErrors(classSectionController.updateClassSection));
+// update class section by sectionId
+router.put(
+  "/:sectionId",
+  /* #swagger.tags = ['Class Sections'] */
+  validator.sectionRules(),
+  validator.checkData,
+  /* #swagger.description = 'add class section by sectionId'
+    #swagger.parameters['classSection'] = {
+        in: 'body',
+        description: 'Class section obejct',
+        required: true,
+        schema: {
+            sectionId: 'CSE212-001',
+            classId: 'CSE212',
+            semesterId: 'fall2025',
+            teacherId: 'T12345',
+            classroomId: 'CSB201',
+            meetingTimes: [
+            { "day": "Mon", "start": "10:00", "end": "11:15" },
+            { "day": "Wed", "start": "10:00", "end": "11:15" }
+            ],
+            capacity: 40
+        }
+    } */
+  utils.handleErrors(classSectionController.updateClassSection)
+);
 
 // // ============================================
 // // DELETE route
 // // ============================================
-// // delete class section by sectionNumber
-router.delete("/:sectionNumber", /* #swagger.tags = ['Class Sections'] */ utils.handleErrors(classSectionController.deleteBySectionNumber));
+// // delete class section by sectionId
+router.delete(
+  "/:sectionId",
+  /* #swagger.tags = ['Class Sections'] */ utils.handleErrors(
+    classSectionController.deleteBySectionId
+  )
+);
 
 module.exports = router;

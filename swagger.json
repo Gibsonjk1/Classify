@@ -48,15 +48,72 @@
         "tags": [
           "Class Sections"
         ],
-        "description": "",
+        "description": "add class section by sectionId",
+        "parameters": [
+          {
+            "name": "classSection",
+            "in": "body",
+            "description": "Class section obejct",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sectionId": {
+                  "type": "string",
+                  "example": "CSE212-001"
+                },
+                "classId": {
+                  "type": "string",
+                  "example": "CSE212"
+                },
+                "semesterId": {
+                  "type": "string",
+                  "example": "fall2025"
+                },
+                "teacherId": {
+                  "type": "string",
+                  "example": "T12345"
+                },
+                "classroomId": {
+                  "type": "string",
+                  "example": "CSB201"
+                },
+                "meetingTimes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "day": {
+                        "type": "string",
+                        "example": "Wed"
+                      },
+                      "start": {
+                        "type": "string",
+                        "example": "10:00"
+                      },
+                      "end": {
+                        "type": "string",
+                        "example": "11:15"
+                      }
+                    }
+                  }
+                },
+                "capacity": {
+                  "type": "number",
+                  "example": 40
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": ""
           }
         }
       }
     },
-    "/class-sections/{sectionNumber}": {
+    "/class-sections/{sectionId}": {
       "get": {
         "tags": [
           "Class Sections"
@@ -64,7 +121,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "sectionNumber",
+            "name": "sectionId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -80,18 +137,73 @@
         "tags": [
           "Class Sections"
         ],
-        "description": "",
+        "description": "add class section by sectionId",
         "parameters": [
           {
-            "name": "sectionNumber",
+            "name": "sectionId",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "classSection",
+            "in": "body",
+            "description": "Class section obejct",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sectionId": {
+                  "type": "string",
+                  "example": "CSE212-001"
+                },
+                "classId": {
+                  "type": "string",
+                  "example": "CSE212"
+                },
+                "semesterId": {
+                  "type": "string",
+                  "example": "fall2025"
+                },
+                "teacherId": {
+                  "type": "string",
+                  "example": "T12345"
+                },
+                "classroomId": {
+                  "type": "string",
+                  "example": "CSB201"
+                },
+                "meetingTimes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "day": {
+                        "type": "string",
+                        "example": "Wed"
+                      },
+                      "start": {
+                        "type": "string",
+                        "example": "10:00"
+                      },
+                      "end": {
+                        "type": "string",
+                        "example": "11:15"
+                      }
+                    }
+                  }
+                },
+                "capacity": {
+                  "type": "number",
+                  "example": 40
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -102,7 +214,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "sectionNumber",
+            "name": "sectionId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -131,15 +243,44 @@
         "tags": [
           "Classes"
         ],
-        "description": "",
+        "description": "add class by classId",
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "body",
+            "description": "Class ID obejct",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "classId": {
+                  "type": "string",
+                  "example": "MECH360"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "Automotive Restoration"
+                },
+                "credits": {
+                  "type": "number",
+                  "example": 3
+                },
+                "description": {
+                  "type": "string",
+                  "example": "The restoration of vintage vehicles..."
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": ""
           }
         }
       }
     },
-    "/classes/{courseCode}": {
+    "/classes/{classId}": {
       "get": {
         "tags": [
           "Classes"
@@ -147,7 +288,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "courseCode",
+            "name": "classId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -163,18 +304,39 @@
         "tags": [
           "Classes"
         ],
-        "description": "",
+        "description": "add class by classId",
         "parameters": [
           {
-            "name": "courseCode",
-            "in": "path",
+            "name": "classId",
+            "in": "body",
             "required": true,
-            "type": "string"
+            "description": "Class ID obejct",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "classId": {
+                  "type": "string",
+                  "example": "MECH360"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "Automotive Restoration"
+                },
+                "credits": {
+                  "type": "number",
+                  "example": 3
+                },
+                "description": {
+                  "type": "string",
+                  "example": "The restoration of vintage vehicles..."
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -185,7 +347,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "courseCode",
+            "name": "classId",
             "in": "path",
             "required": true,
             "type": "string"
