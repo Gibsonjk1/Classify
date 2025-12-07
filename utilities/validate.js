@@ -221,9 +221,9 @@ validate.classRules = () => {
       .trim()
       .notEmpty()
       .withMessage("Credits are required.")
-      .isNumeric()
+      .isInt()
       .withMessage("Please provide a valid number of credits."),
-    //description required rule
+    // description required rule
     body("description")
       .trim()
       .escape()
