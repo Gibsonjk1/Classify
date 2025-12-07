@@ -137,7 +137,7 @@
         "tags": [
           "Class Sections"
         ],
-        "description": "add class section by sectionId",
+        "description": "update class section by sectionId",
         "parameters": [
           {
             "name": "sectionId",
@@ -304,7 +304,7 @@
         "tags": [
           "Classes"
         ],
-        "description": "add class by classId",
+        "description": "update class by classId",
         "parameters": [
           {
             "name": "classId",
@@ -376,15 +376,48 @@
         "tags": [
           "Classrooms"
         ],
-        "description": "",
+        "description": "add classroom by classroomId",
+        "parameters": [
+          {
+            "name": "classroomId",
+            "in": "body",
+            "description": "Classroom ID obejct",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "classroomId": {
+                  "type": "string",
+                  "example": "MECHB360"
+                },
+                "roomNumber": {
+                  "type": "string",
+                  "example": "360"
+                },
+                "buildingId": {
+                  "type": "string",
+                  "example": "MECHB"
+                },
+                "buidlingName": {
+                  "type": "string",
+                  "example": "Mechanical Engineering"
+                },
+                "capacity": {
+                  "type": "number",
+                  "example": 40
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": ""
           }
         }
       }
     },
-    "/classrooms/{roomNumber}": {
+    "/classrooms/{classroomId}": {
       "get": {
         "tags": [
           "Classrooms"
@@ -392,7 +425,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "roomNumber",
+            "name": "classroomId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -408,18 +441,43 @@
         "tags": [
           "Classrooms"
         ],
-        "description": "",
+        "description": "update classroom by classroomId",
         "parameters": [
           {
-            "name": "roomNumber",
-            "in": "path",
+            "name": "classroomId",
+            "in": "body",
             "required": true,
-            "type": "string"
+            "description": "Classroom ID obejct",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "classroomId": {
+                  "type": "string",
+                  "example": "MECHB360"
+                },
+                "roomNumber": {
+                  "type": "string",
+                  "example": "360"
+                },
+                "buildingId": {
+                  "type": "string",
+                  "example": "MECHB"
+                },
+                "buidlingName": {
+                  "type": "string",
+                  "example": "Mechanical Engineering"
+                },
+                "capacity": {
+                  "type": "number",
+                  "example": 40
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -430,7 +488,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "roomNumber",
+            "name": "classroomId",
             "in": "path",
             "required": true,
             "type": "string"

@@ -61,7 +61,7 @@ router.put(
   /* #swagger.tags = ['Class Sections'] */
   validator.sectionRules(),
   validator.checkData,
-  /* #swagger.description = 'add class section by sectionId'
+  /* #swagger.description = 'update class section by sectionId'
     #swagger.parameters['classSection'] = {
         in: 'body',
         description: 'Class section obejct',

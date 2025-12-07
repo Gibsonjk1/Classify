@@ -55,7 +55,7 @@ router.put(
   /* #swagger.tags = ['Classes'] */
   validator.classRules(),
   validator.checkData,
-  /* #swagger.description = 'add class by classId'
+  /* #swagger.description = 'update class by classId'
     #swagger.parameters['classId'] = {
         in: 'body',
         description: 'Class ID obejct',

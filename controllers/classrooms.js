@@ -14,18 +14,18 @@ classroomsUtils.getAllClassrooms = async (req, res, next) => {
   res.json(classrooms);
 };
 
-// get classroom by roomNumber
-classroomsUtils.getByRoomNumber = async (req, res, next) => {
+// get classroom by classroomId
+classroomsUtils.getByClassroomId = async (req, res, next) => {
   try {
-    const roomNumber = req.params.roomNumber;
+    const classroomId = req.params.classroomId;
     const result = mongoDb
       .getDb()
       .db("Classify")
       .collection("classrooms")
-      .find({ roomNumber: roomNumber });
+      .find({ classroomId: classroomId });
     const classroom = await result.toArray();
     if (!classroom.length > 0) {
-      const error = new Error("No data found with that room number.");
+      const error = new Error("No data found with that classroom ID.");
       error.name = "blank id";
       throw error;
     }
@@ -40,7 +40,7 @@ classroomsUtils.getByRoomNumber = async (req, res, next) => {
       res
         .status(500)
         .json(
-          error.message || "An error occured while retrieving the room number."
+          error.message || "An error occured while retrieving the classroom ID."
         );
     }
   }
@@ -53,9 +53,10 @@ classroomsUtils.getByRoomNumber = async (req, res, next) => {
 classroomsUtils.insertClassroom = async (req, res) => {
   try {
     const classroom = {
-      _id: req.body._id,
-      building: req.body.building,
+      classroomId: req.body.classroomId,
       roomNumber: req.body.roomNumber,
+      buildingId: req.body.buildingId,
+      buildingName: req.body.buildingName,
       capacity: req.body.capacity,
     };
     const response = await mongoDb
@@ -79,30 +80,33 @@ classroomsUtils.insertClassroom = async (req, res) => {
 // ==============================================
 // PUT logic
 // ==============================================
-// update classroom by roomNumber
-classroomsUtils.updateClassroom = async (req, res) => {
+// update classroom by classroomId
+classroomsUtils.updateClassroomById = async (req, res) => {
   try {
-    const roomNumber = req.params.roomNumber;
+    const classroomId = req.params.classroomId;
     const updateData = {
-      building: req.body.building,
-      capacity: req.body.capacity
+      classroomId: req.body.classroomId,
+      roomNumber: req.body.roomNumber,
+      buildingId: req.body.buildingId,
+      buildingName: req.body.buildingName,
+      capacity: req.body.capacity,
     };
 
     // Remove undefined fields
-    Object.keys(updateData).forEach(key =>
-      updateData[key] === undefined && delete updateData[key]
+    Object.keys(updateData).forEach(
+      (key) => updateData[key] === undefined && delete updateData[key]
     );
 
     const response = await mongoDb
       .getDb()
       .db("Classify")
       .collection("classrooms")
-      .updateOne({ roomNumber: roomNumber }, { $set: updateData });
+      .updateOne({ classroomId: classroomId }, { $set: updateData });
 
     if (response.matchedCount > 0) {
       res.status(204).send();
     } else {
-      const error = new Error("Room number does not exist");
+      const error = new Error("Classroom ID does not exist");
       error.name = "no such id";
       throw error;
     }
@@ -113,7 +117,7 @@ classroomsUtils.updateClassroom = async (req, res) => {
       res
         .status(500)
         .json(
-          error.message || "Some error occurred while updating the classroom."
+          error.message || "Some error occurred while updating the classroom ID."
         );
     }
   }
@@ -122,19 +126,19 @@ classroomsUtils.updateClassroom = async (req, res) => {
 // ==============================================
 // DELETE logic
 // ==============================================
-// delete classroom by roomNumber
-classroomsUtils.deleteByRoomNumber = async (req, res) => {
+// delete classroom by classroomId
+classroomsUtils.deleteByClassroomId = async (req, res) => {
   try {
-    const roomNumber = req.params.roomNumber;
+    const classroomId = req.params.classroomId;
     const response = await mongoDb
       .getDb()
       .db("Classify")
       .collection("classrooms")
-      .deleteOne({ roomNumber: roomNumber }, true);
+      .deleteOne({ classroomId: classroomId }, true);
     if (response.deletedCount > 0) {
       res.status(204).send();
     } else {
-      const error = new Error("classroom code does not exist");
+      const error = new Error("Classroom ID does not exist");
       error.name = "no such id";
       throw error;
     }
@@ -145,7 +149,7 @@ classroomsUtils.deleteByRoomNumber = async (req, res) => {
       res
         .status(500)
         .json(
-          error.message || "Some error occured while deleting the classroom."
+          error.message || "Some error occured while deleting the classroom ID."
         );
     }
   }

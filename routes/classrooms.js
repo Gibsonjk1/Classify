@@ -7,27 +7,80 @@ const validator = require("../utilities/validate");
 // GET routes
 // ============================================
 // get all classrooms
-router.get("/", /* #swagger.tags = ['Classrooms'] */ utils.handleErrors(classroomsController.getAllClassrooms));
+router.get(
+  "/",
+  /* #swagger.tags = ['Classrooms'] */ utils.handleErrors(
+    classroomsController.getAllClassrooms
+  )
+);
 
-// // get classroom by roomNumber
-router.get("/:roomNumber", /* #swagger.tags = ['Classrooms'] */ utils.handleErrors(classroomsController.getByRoomNumber));
+// // get classroom by classroomId
+router.get(
+  "/:classroomId",
+  /* #swagger.tags = ['Classrooms'] */ utils.handleErrors(
+    classroomsController.getByClassroomId
+  )
+);
 
 // // ============================================
 // // POST route
 // // ============================================
 // // add classroom
-router.post("/", /* #swagger.tags = ['Classrooms'] */ validator.classroomRules(), validator.checkData, utils.handleErrors(classroomsController.insertClassroom));
+router.post(
+  "/",
+  /* #swagger.tags = ['Classrooms'] */ 
+  validator.classroomRules(),
+  validator.checkData,
+  /* #swagger.description = 'add classroom by classroomId'
+    #swagger.parameters['classroomId'] = {
+        in: 'body',
+        description: 'Classroom ID obejct',
+        required: true,
+        schema: {
+            classroomId: 'MECHB360',
+            roomNumber: '360',
+            buildingId: 'MECHB',
+            buidlingName: 'Mechanical Engineering',
+            capacity: 40
+        }
+    } */
+  utils.handleErrors(classroomsController.insertClassroom)
+);
 
 // ============================================
 // PUT route
 // ============================================
-// update classroom by roomNumber
-router.put("/:roomNumber", /* #swagger.tags = ['Classrooms'] */ validator.classroomRules(), validator.checkData, utils.handleErrors(classroomsController.updateClassroom));
+// update classroom by classroomId
+router.put(
+  "/:classroomId",
+  /* #swagger.tags = ['Classrooms'] */ 
+  validator.classroomRules(),
+  validator.checkData,
+  /* #swagger.description = 'update classroom by classroomId'
+    #swagger.parameters['classroomId'] = {
+        in: 'body',
+        description: 'Classroom ID obejct',
+        required: true,
+        schema: {
+            classroomId: 'MECHB360',
+            roomNumber: '360',
+            buildingId: 'MECHB',
+            buidlingName: 'Mechanical Engineering',
+            capacity: 40
+        }
+    } */
+  utils.handleErrors(classroomsController.updateClassroomById)
+);
 
 // // ============================================
 // // DELETE route
 // // ============================================
-// // delete classroom by roomNumber
-router.delete("/:roomNumber", /* #swagger.tags = ['Classrooms'] */ utils.handleErrors(classroomsController.deleteByRoomNumber));
+// // delete classroom by classroomId
+router.delete(
+  "/:classroomId",
+  /* #swagger.tags = ['Classrooms'] */ utils.handleErrors(
+    classroomsController.deleteByClassroomId
+  )
+);
 
 module.exports = router;

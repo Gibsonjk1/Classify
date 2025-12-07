@@ -176,20 +176,34 @@ validate.enrollmentRules = () => {
 
 validate.classroomRules = () => {
   return [
-    //building required rule
-    body("building")
+    //classroomId required rule
+    body("classroomId")
       .trim()
       .escape()
       .notEmpty()
-      .isLength({ min: 2 })
-      .withMessage("Building is required."),
+      .isLength({ min: 5 })
+      .withMessage("Classroom ID is required."),
     //room number required rule
     body("roomNumber")
       .trim()
       .escape()
       .notEmpty()
-      .isLength({ min: 1 })
+      .isLength({ min: 3 })
       .withMessage("Room number is required."),
+    //building ID required rule
+    body("buildingId")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 2 })
+      .withMessage("Building ID is required."),
+    //building ID required rule
+    body("buildingName")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 2 })
+      .withMessage("Building name is required."),
     //capacity required rule
     body("capacity")
       .trim()
