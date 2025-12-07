@@ -7,27 +7,52 @@ const validator = require("../utilities/validate");
 // GET routes
 // ============================================
 // get all class sections
-router.get("/", /* #swagger.tags = ['Class Sections'] */ utils.handleErrors(classSectionController.getAllCourseSections));
+router.get(
+  "/",
+  /* #swagger.tags = ['Class Sections'] */ utils.handleErrors(
+    classSectionController.getAllCourseSections
+  )
+);
 
-// // get class section by sectionNumber
-router.get("/:sectionNumber", /* #swagger.tags = ['Class Sections'] */ utils.handleErrors(classSectionController.getBySectionNumber));
+// // get class section by sectionId
+router.get(
+  "/:sectionId",
+  /* #swagger.tags = ['Class Sections'] */ utils.handleErrors(
+    classSectionController.getBySectionId
+  )
+);
 
 // // ============================================
 // // POST route
 // // ============================================
 // // add class section
-router.post("/", /* #swagger.tags = ['Class Sections'] */ validator.sectionRules(), validator.checkData, utils.handleErrors(classSectionController.insertClassSection));
+router.post(
+  "/",
+  /* #swagger.tags = ['Class Sections'] */ validator.sectionRules(),
+  validator.checkData,
+  utils.handleErrors(classSectionController.insertClassSection)
+);
 
 // ============================================
 // PUT route
 // ============================================
-// update class section by sectionNumber
-router.put("/:sectionNumber", /* #swagger.tags = ['Class Sections'] */ validator.sectionRules(), validator.checkData, utils.handleErrors(classSectionController.updateClassSection));
+// update class section by sectionId
+router.put(
+  "/:sectionId",
+  /* #swagger.tags = ['Class Sections'] */ validator.sectionRules(),
+  validator.checkData,
+  utils.handleErrors(classSectionController.updateClassSection)
+);
 
 // // ============================================
 // // DELETE route
 // // ============================================
-// // delete class section by sectionNumber
-router.delete("/:sectionNumber", /* #swagger.tags = ['Class Sections'] */ utils.handleErrors(classSectionController.deleteBySectionNumber));
+// // delete class section by sectionId
+router.delete(
+  "/:sectionId",
+  /* #swagger.tags = ['Class Sections'] */ utils.handleErrors(
+    classSectionController.deleteBySectionId
+  )
+);
 
 module.exports = router;
