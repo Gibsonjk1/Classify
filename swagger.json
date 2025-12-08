@@ -517,10 +517,49 @@
         "tags": [
           "Teachers"
         ],
-        "description": "",
+        "description": "add teacher by teacherId",
+        "parameters": [
+          {
+            "name": "teacherId",
+            "in": "body",
+            "description": "Teacher ID obejct",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "teacherId": {
+                  "type": "string",
+                  "example": "TAT01912"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "Alan"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Turing"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "TAT01912@university.edu"
+                },
+                "departments": {
+                  "type": "array",
+                  "example": [
+                    "CS",
+                    "MATH"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -549,18 +588,49 @@
         "tags": [
           "Teachers"
         ],
-        "description": "",
+        "description": "add teacher by teacherId",
         "parameters": [
           {
             "name": "teacherId",
-            "in": "path",
+            "in": "body",
             "required": true,
-            "type": "string"
+            "description": "Teacher ID obejct",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "teacherId": {
+                  "type": "string",
+                  "example": "TAT01912"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "Alan"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Turing"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "TAT01912@university.edu"
+                },
+                "departments": {
+                  "type": "array",
+                  "example": [
+                    "CS",
+                    "MATH"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": ""
           }
         }
       },

@@ -2,6 +2,9 @@ const utilities = require(".");
 const { body, validationResult } = require("express-validator");
 const validate = {};
 
+// ==============================================
+// student validation rules
+// ==============================================
 validate.studentRules = () => {
   return [
     //Student ID rules
@@ -51,6 +54,9 @@ validate.studentRules = () => {
   ];
 };
 
+// ==============================================
+// teacher validation rules
+// ==============================================
 validate.teacherRules = () => {
   return [
     //Teacher ID rules
@@ -58,7 +64,7 @@ validate.teacherRules = () => {
       .trim()
       .escape()
       .notEmpty()
-      .isLength({ min: 1 })
+      .isLength({ min: 8 })
       .withMessage("Teacher ID is required"),
     //firstname required rule
     body("firstName")
@@ -93,6 +99,9 @@ validate.teacherRules = () => {
   ];
 };
 
+// ==============================================
+// semester validation rules
+// ==============================================
 validate.semesterRules = () => {
   return [
     //semester rules
@@ -135,13 +144,13 @@ validate.semesterRules = () => {
       .withMessage("Please provide a valid end date.")
       // end date is after start date
       .custom((value, { req }) => {
-      const startDate = new Date(req.body.startDate);
-      const endDate = new Date(value);
-      if (endDate <= startDate) {
-        throw new Error("End date must be after start date.");
-      }
-      return true;
-    }),
+        const startDate = new Date(req.body.startDate);
+        const endDate = new Date(value);
+        if (endDate <= startDate) {
+          throw new Error("End date must be after start date.");
+        }
+        return true;
+      }),
     // active status required rule
     body("active")
       .trim()
@@ -152,6 +161,9 @@ validate.semesterRules = () => {
   ];
 };
 
+// ==============================================
+// enrollment validation rules
+// ==============================================
 validate.enrollmentRules = () => {
   return [
     //enrollment ID rules
@@ -182,13 +194,29 @@ validate.enrollmentRules = () => {
       .notEmpty()
       .isIn(["enrolled", "waitlisted", "dropped"])
       .withMessage("Please provide a valid enrollment status."),
+    //enrolledAt required rule
+    body("enrolledAt")
+      .optional({ nullable: true })
+      .trim()
+      .escape()
+      .isString()
+      .toDate()
+      .isISO8601()
+      .withMessage("Must be a date formatted as ISO8601"),
+    //gpa required rule
+    body("gpa")
+      .optional({ nullable: true })
+      .trim()
+      .escape()
+      .matches(/^\P{L}*$/u)
+      .isFloat()
+      .withMessage("must be formatted as a numeric grade point average (gpa) ")
   ];
-  /*
-    Did not include validation for grades as they can be null/empty initially
-    Did not include validation for enrollment date as it can be set automatically to current date
-    */
 };
 
+// ==============================================
+// classroom validation rules
+// ==============================================
 validate.classroomRules = () => {
   return [
     //classroomId required rule
@@ -229,6 +257,9 @@ validate.classroomRules = () => {
   ];
 };
 
+// ==============================================
+// class validation rules
+// ==============================================
 validate.classRules = () => {
   return [
     //classId required rule
@@ -262,6 +293,9 @@ validate.classRules = () => {
   ];
 };
 
+// ==============================================
+// section validation rules
+// ==============================================
 validate.sectionRules = () => {
   return [
     //sectionId required rule
@@ -269,21 +303,21 @@ validate.sectionRules = () => {
       .trim()
       .escape()
       .notEmpty()
-      // .isLength({ min: 1 })
+      .isLength({ min: 1 })
       .withMessage("Section ID is required."),
     //classId required rule
     body("classId")
       .trim()
       .escape()
       .notEmpty()
-      // .isLength({ min: 1 })
+      .isLength({ min: 1 })
       .withMessage("Class ID is required."),
     //semesterId required rule
     body("semesterId")
       .trim()
       .escape()
       .notEmpty()
-      // .isLength({ min: 1 })
+      .isLength({ min: 1 })
       .withMessage("Semester ID is required."),
     //teacherId required rule
     body("teacherId")
@@ -297,16 +331,61 @@ validate.sectionRules = () => {
       .trim()
       .escape()
       .notEmpty()
-      // .isLength({ min: 1 })
       .withMessage("Classroom ID is required."),
     //meetingTimes required rule
-    // body("meetingTimes")
-    //   .trim()
-    //   .escape()
-    //   .notEmpty()
-    //   .isArray()
-    //   .isLength({ min: 1 })
-    //   .withMessage("Meeting times are required."),
+    body("meetingTimes")
+      .notEmpty()
+      .isArray()
+      .withMessage("Meeting times are required."),
+    body("meetingTimes[0].day")
+      .exists()
+      .trim()
+      .escape()
+      .isString()
+      .isLength({ min: 3, max: 3 })
+      .isIn(["Mon", "Tue", "Wed", "Thu", "Fri"]),
+    body(
+      "meetingTimes[1].day",
+      "meetingTimes[2].day",
+      "meetingTimes[3].day",
+      "meetingTimes[4].day"
+    )
+      .optional()
+      .trim()
+      .escape()
+      .isString()
+      .isLength({ min: 3, max: 3 })
+      .isIn(["Mon", "Tue", "Wed", "Thu", "Fri"])
+      .withMessage(
+        "Must be a weekday abbreviation using three-letter day code"
+      ),
+    body("meetingTimes[0].start", "meetingTimes[0].end")
+      .exists()
+      .trim()
+      .escape()
+      .notEmpty()
+      .isString()
+      .matches(/^\P{L}*$/u)
+      .isLength({ min: 5, max: 5 })
+      .withMessage("Time must be string formatted as 00:00"),
+    body(
+      "meetingTimes[1].start",
+      "meetingTimes[1].end",
+      "meetingTimes[2].start",
+      "meetingTimes[2].end",
+      "meetingTimes[3].start",
+      "meetingTimes[3].end",
+      "meetingTimes[4].start",
+      "meetingTimes[4].end"
+    )
+      .optional()
+      .trim()
+      .escape()
+      .notEmpty()
+      .isString()
+      .matches(/^\P{L}*$/u)
+      .isLength({ min: 5, max: 5 })
+      .withMessage("Time must be string formatted as 00:00"),
     //capacity required rule
     body("capacity")
       .trim()

@@ -6,7 +6,7 @@ const teachersUtils = {};
 // GET logic
 // ==============================================
 // get all teachers
-teachersUtils.getAll = async (req, res, next) => {
+teachersUtils.getAllTeachers = async (req, res, next) => {
   const result = mongoDb.getDb().db("Classify").collection("teachers").find();
   const teachers = await result.toArray();
   res.setHeader("content-type", "application/json");
@@ -14,7 +14,7 @@ teachersUtils.getAll = async (req, res, next) => {
   res.json(teachers);
 };
 
-// get teacher by id
+// get teacher by teacherId
 teachersUtils.getByTeacherId = async (req, res, next) => {
   try {
     const teacherId = req.params.teacherId;
@@ -53,12 +53,11 @@ teachersUtils.getByTeacherId = async (req, res, next) => {
 teachersUtils.insertTeacher = async (req, res) => {
   try {
     const teacher = {
-      _id: req.body._id,
       teacherId: req.body.teacherId,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      departments: req.body.departments
+      departments: req.body.departments,
     };
     const response = await mongoDb
       .getDb()
@@ -72,9 +71,7 @@ teachersUtils.insertTeacher = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json(
-        error.message || "Some error occured while inserting the teacher."
-      );
+      .json(error.message || "Some error occured while inserting the teacher.");
   }
 };
 
@@ -82,19 +79,20 @@ teachersUtils.insertTeacher = async (req, res) => {
 // PUT logic
 // ==============================================
 // update teacher by teacherId
-teachersUtils.updateTeacher = async (req, res) => {
+teachersUtils.updateTeacherById = async (req, res) => {
   try {
     const teacherId = req.params.teacherId;
     const updateData = {
+      teacherId: req.body.teacherId,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      departments: req.body.departments
+      departments: req.body.departments,
     };
 
     // Remove undefined fields
-    Object.keys(updateData).forEach(key =>
-      updateData[key] === undefined && delete updateData[key]
+    Object.keys(updateData).forEach(
+      (key) => updateData[key] === undefined && delete updateData[key]
     );
 
     const response = await mongoDb
@@ -138,7 +136,7 @@ teachersUtils.deleteByTeacherId = async (req, res) => {
     if (response.deletedCount > 0) {
       res.status(204).send();
     } else {
-      const error = new Error("teacher id does not exist");
+      const error = new Error("Teacher id does not exist");
       error.name = "no such id";
       throw error;
     }

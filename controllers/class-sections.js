@@ -42,6 +42,7 @@ classSectionsUtils.getBySectionId = async (req, res, next) => {
       error.name = "blank id";
       throw error;
     }
+    // console.log(classSection[0].meetingTimes);
     res.setHeader("content-type", "application/json");
     res.status(200).json(classSection[0]);
   } catch (error) {
@@ -53,8 +54,7 @@ classSectionsUtils.getBySectionId = async (req, res, next) => {
       res
         .status(500)
         .json(
-          error.message ||
-          "An error occured while retrieving the section id."
+          error.message || "An error occured while retrieving the section id."
         );
     }
   }
@@ -111,8 +111,8 @@ classSectionsUtils.updateClassSection = async (req, res) => {
     };
 
     // Remove undefined fields
-    Object.keys(updateData).forEach(key =>
-      updateData[key] === undefined && delete updateData[key]
+    Object.keys(updateData).forEach(
+      (key) => updateData[key] === undefined && delete updateData[key]
     );
 
     const response = await mongoDb
