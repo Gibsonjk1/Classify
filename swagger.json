@@ -600,10 +600,47 @@
         "tags": [
           "Students"
         ],
-        "description": "",
+        "description": "add student by studentId",
+        "parameters": [
+          {
+            "name": "studentId",
+            "in": "body",
+            "description": "Student ID obejct",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "studentId": {
+                  "type": "string",
+                  "example": "SAL123456"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "Ada"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Lovelace"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "SAL123456@university.edu"
+                },
+                "major": {
+                  "type": "string",
+                  "example": "CS"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2025-11-14T00:00:00Z"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -632,18 +669,47 @@
         "tags": [
           "Students"
         ],
-        "description": "",
+        "description": "add student by studentId",
         "parameters": [
           {
             "name": "studentId",
-            "in": "path",
+            "in": "body",
             "required": true,
-            "type": "string"
+            "description": "Student ID obejct",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "studentId": {
+                  "type": "string",
+                  "example": "SAL123456"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "Ada"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Lovelace"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "SAL123456@university.edu"
+                },
+                "major": {
+                  "type": "string",
+                  "example": "CS"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2025-11-14T00:00:00Z"
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "400": {
-            "description": "Bad Request"
+          "default": {
+            "description": ""
           }
         }
       },

@@ -29,8 +29,8 @@ router.get(
 router.post(
   "/",
   /* #swagger.tags = ['Semesters'] */
-  // validator.semesterRules(),
-  // validator.checkData,
+  validator.semesterRules(),
+  validator.checkData,
   /* #swagger.description = 'add semester by semesterId'
     #swagger.parameters['semesterId'] = {
       in: 'body',
@@ -55,8 +55,8 @@ router.post(
 router.put(
   "/:semesterId",
   /* #swagger.tags = ['Semesters'] */
-  // validator.semesterRules(),
-  // validator.checkData,
+  validator.semesterRules(),
+  validator.checkData,
   /* #swagger.description = 'update semester by semesterId'
     #swagger.parameters['semesterId'] = {
       in: 'body',

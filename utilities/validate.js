@@ -9,7 +9,7 @@ validate.studentRules = () => {
       .trim()
       .escape()
       .notEmpty()
-      .isLength({ min: 1 })
+      .isLength({ min: 9 })
       .withMessage("Student ID is required"),
     //firstname required rule
     body("firstName")
@@ -33,6 +33,21 @@ validate.studentRules = () => {
       .isEmail()
       .normalizeEmail() // refer to validator.js docs
       .withMessage("A valid email is required."),
+    //major required rule
+    body("major")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 2 })
+      .withMessage("Please provide a major."),
+    //createdAt required rule
+    body("createdAt")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isISO8601()
+      .toDate()
+      .withMessage("Please provide a last name."),
   ];
 };
 
@@ -110,7 +125,6 @@ validate.semesterRules = () => {
       .escape()
       .notEmpty()
       .isISO8601()
-      // .toDate()
       .withMessage("Please provide a valid start date."),
     //valid end date rule
     body("endDate")
@@ -118,7 +132,6 @@ validate.semesterRules = () => {
       .escape()
       .notEmpty()
       .isISO8601()
-      // .toDate()
       .withMessage("Please provide a valid end date.")
       // end date is after start date
       .custom((value, { req }) => {

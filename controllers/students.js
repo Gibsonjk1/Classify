@@ -6,7 +6,7 @@ const studentsUtils = {};
 // GET logic
 // ==============================================
 // get all students
-studentsUtils.getAll = async (req, res, next) => {
+studentsUtils.getAllStudents = async (req, res, next) => {
   const result = mongoDb.getDb().db("Classify").collection("students").find();
   const students = await result.toArray();
   res.setHeader("content-type", "application/json");
@@ -53,7 +53,6 @@ studentsUtils.getByStudentId = async (req, res, next) => {
 studentsUtils.insertStudent = async (req, res) => {
   try {
     const student = {
-      _id: req.body._id,
       studentId: req.body.studentId,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -83,14 +82,15 @@ studentsUtils.insertStudent = async (req, res) => {
 // PUT logic
 // ==============================================
 // update student by studentId
-studentsUtils.updateStudent = async (req, res) => {
+studentsUtils.updateStudentById = async (req, res) => {
   try {
     const studentId = req.params.studentId;
     const updateData = {
+      studentId: req.body.studentId,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      major: req.body.major
+      major: req.body.major,
     };
 
     // Remove undefined fields
