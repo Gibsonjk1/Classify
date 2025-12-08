@@ -81,27 +81,22 @@ validate.teacherRules = () => {
 validate.semesterRules = () => {
   return [
     //semester rules
-    body("semester_id")
+    //semesterId required rules
+    body("semesterId")
       .trim()
       .escape()
       .notEmpty()
-      .isLength({ min: 1 })
+      .isLength({ min: 8 })
       .withMessage("Semester ID is required."),
-    //semester name required rule
-    body("name")
-      .trim()
-      .escape()
-      .notEmpty()
-      .isLength({ min: 3 })
-      .withMessage("Semester name is required."),
     //semester year required rule
     body("year")
       .trim()
+      .escape()
       .notEmpty()
-      .withMessage("Year is required.")
+      .isInt()
+      .toInt()
       .isLength({ min: 4, max: 4 })
-      .isNumeric()
-      .withMessage("Please provide a valid year."),
+      .withMessage("Semester year is required."),
     //semester term required rule
     body("term")
       .trim()
@@ -115,7 +110,7 @@ validate.semesterRules = () => {
       .escape()
       .notEmpty()
       .isISO8601()
-      .toDate()
+      // .toDate()
       .withMessage("Please provide a valid start date."),
     //valid end date rule
     body("endDate")
@@ -123,10 +118,10 @@ validate.semesterRules = () => {
       .escape()
       .notEmpty()
       .isISO8601()
-      .toDate()
-      .withMessage("Please provide a valid end date."),
-    // end date is after start date
-    body("endDate").custom((value, { req }) => {
+      // .toDate()
+      .withMessage("Please provide a valid end date.")
+      // end date is after start date
+      .custom((value, { req }) => {
       const startDate = new Date(req.body.startDate);
       const endDate = new Date(value);
       if (endDate <= startDate) {

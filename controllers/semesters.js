@@ -6,7 +6,7 @@ const semestersUtils = {};
 // GET logic
 // ==============================================
 // get all semesters
-semestersUtils.getAll = async (req, res, next) => {
+semestersUtils.getAllSemesters = async (req, res, next) => {
   const result = mongoDb.getDb().db("Classify").collection("semesters").find();
   const semesters = await result.toArray();
   res.setHeader("content-type", "application/json");
@@ -14,15 +14,15 @@ semestersUtils.getAll = async (req, res, next) => {
   res.json(semesters);
 };
 
-// get semester by id
-semestersUtils.getById = async (req, res, next) => {
+// get semester by semesterId
+semestersUtils.getSemesterById = async (req, res, next) => {
   try {
-    const semesterId = req.params._id;
+    const semesterId = req.params.semesterId;
     const result = mongoDb
       .getDb()
       .db("Classify")
       .collection("semesters")
-      .find({ _id: semesterId });
+      .find({ semesterId: semesterId });
     const semester = await result.toArray();
     if (!semester.length > 0) {
       const error = new Error("No data found with that semester id.");
@@ -53,13 +53,12 @@ semestersUtils.getById = async (req, res, next) => {
 semestersUtils.insertSemester = async (req, res) => {
   try {
     const semester = {
-      _id: req.body._id,
-      name: req.body.name,
+      semesterId: req.body.semesterId,
       year: req.body.year,
       term: req.body.term,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
-      active: req.body.active
+      active: req.body.active,
     };
     const response = await mongoDb
       .getDb()
@@ -82,17 +81,17 @@ semestersUtils.insertSemester = async (req, res) => {
 // ==============================================
 // PUT logic
 // ==============================================
-// update semester by id
-semestersUtils.updateSemester = async (req, res) => {
+// update semester by semesterId
+semestersUtils.updateSemesterById = async (req, res) => {
   try {
-    const semesterId = req.params._id;
+    const semesterId = req.params.semesterId;
     const updateData = {
-      name: req.body.name,
+      semesterId: req.body.semesterId,
       year: req.body.year,
       term: req.body.term,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
-      active: req.body.active
+      active: req.body.active,
     };
 
     // Remove undefined fields
@@ -104,7 +103,7 @@ semestersUtils.updateSemester = async (req, res) => {
       .getDb()
       .db("Classify")
       .collection("semesters")
-      .updateOne({ _id: semesterId }, { $set: updateData });
+      .updateOne({ semesterId: semesterId }, { $set: updateData });
 
     if (response.matchedCount > 0) {
       res.status(204).send();
@@ -129,15 +128,15 @@ semestersUtils.updateSemester = async (req, res) => {
 // ==============================================
 // DELETE logic
 // ==============================================
-// delete semester by id
-semestersUtils.deleteById = async (req, res) => {
+// delete semester by semesterId
+semestersUtils.deleteSemesterById = async (req, res) => {
   try {
-    const semesterId = req.params._id;
+    const semesterId = req.params.semesterId;
     const response = await mongoDb
       .getDb()
       .db("Classify")
       .collection("semesters")
-      .deleteOne({ _id: semesterId }, true);
+      .deleteOne({ semesterId: semesterId }, true);
     if (response.deletedCount > 0) {
       res.status(204).send();
     } else {

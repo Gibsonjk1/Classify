@@ -1,33 +1,88 @@
 const router = require("express").Router();
 const semestersController = require("../controllers/semesters");
 const utils = require("../utilities");
-const validator = require("../utilities/validate")
+const validator = require("../utilities/validate");
 
 // ============================================
 // GET routes
 // ============================================
 // get all semesters
-router.get("/", /* #swagger.tags = ['Semesters'] */ utils.handleErrors(semestersController.getAll));
+router.get(
+  "/",
+  /* #swagger.tags = ['Semesters'] */ utils.handleErrors(
+    semestersController.getAllSemesters
+  )
+);
 
-// get semester by id
-router.get("/:_id", /* #swagger.tags = ['Semesters'] */ utils.handleErrors(semestersController.getById));
+// get semester by semesterId
+router.get(
+  "/:semesterId",
+  /* #swagger.tags = ['Semesters'] */ utils.handleErrors(
+    semestersController.getSemesterById
+  )
+);
 
 // // ============================================
 // // POST route
 // // ============================================
 // // add semester
-router.post("/", /* #swagger.tags = ['Semesters'] */ validator.semesterRules(), validator.checkData, utils.handleErrors(semestersController.insertSemester));
+router.post(
+  "/",
+  /* #swagger.tags = ['Semesters'] */
+  // validator.semesterRules(),
+  // validator.checkData,
+  /* #swagger.description = 'add semester by semesterId'
+    #swagger.parameters['semesterId'] = {
+      in: 'body',
+      description: 'Semester ID obejct',
+      required: true,
+      schema: {
+        semesterId: 'fall2025',
+        year: 2025,
+        term: 'Fall',
+        startDate: '2025-08-26',
+        endDate: '2025-12-13',
+        active: true,
+      }
+    } */
+  utils.handleErrors(semestersController.insertSemester)
+);
 
 // ============================================
 // PUT route
 // ============================================
-// update semester by id
-router.put("/:_id", /* #swagger.tags = ['Semesters'] */ validator.semesterRules(), validator.checkData, utils.handleErrors(semestersController.updateSemester));
+// update semester by semesterId
+router.put(
+  "/:semesterId",
+  /* #swagger.tags = ['Semesters'] */
+  // validator.semesterRules(),
+  // validator.checkData,
+  /* #swagger.description = 'update semester by semesterId'
+    #swagger.parameters['semesterId'] = {
+      in: 'body',
+      description: 'Semester ID obejct',
+      required: true,
+      schema: {
+        semesterId: 'fall2025',
+        year: 2025,
+        term: 'Fall',
+        startDate: '2025-08-26',
+        endDate: '2025-12-13',
+        active: true,
+      }
+    } */
+  utils.handleErrors(semestersController.updateSemesterById)
+);
 
 // // ============================================
 // // DELETE route
 // // ============================================
-// // delete semester by id
-router.delete("/:_id", /* #swagger.tags = ['Semesters'] */ utils.handleErrors(semestersController.deleteById));
+// // delete semester by semesterId
+router.delete(
+  "/:semesterId",
+  /* #swagger.tags = ['Semesters'] */ utils.handleErrors(
+    semestersController.deleteSemesterById
+  )
+);
 
 module.exports = router;
