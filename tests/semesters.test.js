@@ -33,8 +33,7 @@ describe('Semesters API Endpoints', () => {
   test('should create new semesters', async () => {
     
     const semester = {
-       semester_id: "Fall_2099",
-        name: "Fall 2099",
+       semesterId: "Fall_2099",
         year: 2099,
         term: "Fall",
         startDate: "2099-08-26",
@@ -54,7 +53,7 @@ describe('Semesters API Endpoints', () => {
       .expect(200);
     expect(res.body).not.toBe(null);
     expect (res.body.semesterId).toBe('Fall_2099');
-    expect (res.body.name).toBe('Fall 2099');
+    expect (res.body.year).toBe(2099);
     expect (res.body.term).toBe('Fall');
     expect (res.body).toBeInstanceOf(Object);
   });
@@ -62,8 +61,7 @@ describe('Semesters API Endpoints', () => {
   test('should edit created semester', async () => {
     
     const semester = {
-       semester_id: "Fall_2099",
-        name: "Fall 2098",
+       semesterId: "Fall_2099",
         year: 2098,
         term: "Fall",
         startDate: "2098-08-26",
@@ -82,7 +80,7 @@ describe('Semesters API Endpoints', () => {
       .get('/semesters/Fall_2099')
       .expect(200);
     expect(res.body).not.toBe(null);
-    expect (res.body.name).toBe('Fall 2099');
+    expect (res.body.year).toBe(2098);
   });
 
   test('should delete semester', async () => {

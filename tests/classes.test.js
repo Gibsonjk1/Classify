@@ -33,7 +33,7 @@ describe('Classes API Endpoints', () => {
   test('should create new class', async () => {
     
     const newClass = {
-    courseCode: "UBW101",
+    classId: "UBW101",
     title: "Intro to Underwater Basket Weaving",
     credits: 3,
     description: "What's better than basket weaving? Basket weaving... under water!",
@@ -50,7 +50,7 @@ describe('Classes API Endpoints', () => {
       .get('/classes/UBW101')
       .expect(200);
     expect(res.body).not.toBe(null);
-    expect (res.body.courseCode).toBe('UBW101');
+    expect (res.body.classId).toBe('UBW101');
     expect (res.body.title).toBe('Intro to Underwater Basket Weaving');
     expect (res.body.credits).toBe('3');
     expect (res.body).toBeInstanceOf(Object);
@@ -59,7 +59,7 @@ describe('Classes API Endpoints', () => {
   test('should edit created class', async () => {
     
     const newClass = {
-    courseCode: "UBW101",
+    classId: "UBW101",
     title: "Intro to Underlava Basket Weaving",
     credits: 2,
     description: "Try to focus while holding your breath... and on fire!",
@@ -76,7 +76,7 @@ describe('Classes API Endpoints', () => {
       .get('/classes/UBW101')
       .expect(200);
      expect(res.body).not.toBe(null);
-    expect (res.body.courseCode).toBe('UBW101');
+    expect (res.body.classId).toBe('UBW101');
     expect (res.body.title).toBe("Intro to Underlava Basket Weaving");
     expect (res.body.credits).toBe('2');
     expect (res.body).toBeInstanceOf(Object);

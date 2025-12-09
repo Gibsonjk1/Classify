@@ -33,7 +33,7 @@ describe('Student API Endpoints', () => {
   test('should create new student', async () => {
     
     const student = {
-      studentId: "S543210",
+      studentId: "STU543210",
       firstName: "Kevin",
       lastName: "McCallister",
       email: "HomeAlone@Imallalone.com",
@@ -49,10 +49,10 @@ describe('Student API Endpoints', () => {
 
   test('should return created student', async () => {
     const res = await request(app)
-      .get('/students/S543210')
+      .get('/students/STU543210')
       .expect(200);
     expect(res.body).not.toBe(null);
-    expect (res.body.studentId).toBe('S543210');
+    expect (res.body.studentId).toBe('STU543210');
     expect (res.body.firstName).toBe('Kevin');
     expect (res.body.lastName).toBe('McCallister');
     expect (res.body).toBeInstanceOf(Object);
@@ -61,7 +61,7 @@ describe('Student API Endpoints', () => {
   test('should edit created student', async () => {
     
     const student = {
-      studentId: "S543210",
+      studentId: "STU543210",
       firstName: "Buzz",
       lastName: "McCallister",
       email: "StillHomeAlone@Imallalone.com",
@@ -70,17 +70,17 @@ describe('Student API Endpoints', () => {
     };
 
     const res = await request(app)
-      .put('/students/S543210')
+      .put('/students/STU543210')
       .send(student)
       .expect(204);
   });
 
   test('should return updated student', async () => {
     const res = await request(app)
-      .get('/students/S543210')
+      .get('/students/STU543210')
       .expect(200);
     expect(res.body).not.toBe(null);
-    expect (res.body.studentId).toBe('S543210');
+    expect (res.body.studentId).toBe('STU543210');
     expect (res.body.firstName).toBe('Buzz');
     expect (res.body.lastName).toBe('McCallister');
     expect (res.body).toBeInstanceOf(Object);
@@ -88,7 +88,7 @@ describe('Student API Endpoints', () => {
 
   test('should delete student', async () => {
     const res = await request(app)
-      .delete('/students/S543210')
+      .delete('/students/STU543210')
       .expect(204);
   });
 });

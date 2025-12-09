@@ -33,12 +33,12 @@ describe('Enrollment API Endpoints', () => {
   test('should create new enrollment', async () => {
     
     const enrollment = {
-      enrollment_id: "0987654321",
-        studentId: "6740f1a5c9e6f9a1b1234567",
-        sectionId: "6740f1a5c9e6f9a1b3333333",
+      enrollmentId: "098765432109876",
+        studentId: "STU098765",
+        departmentId: "Math",
         status: "enrolled",
         enrolledAt: "2025-08-20T12:00:00Z",
-        grade: "B-"
+        gpa: "3.2"
     };
 
     const res = await request(app)
@@ -49,45 +49,46 @@ describe('Enrollment API Endpoints', () => {
 
   test('should return created enrollment', async () => {
     const res = await request(app)
-      .get('/enrollments/0987654321')
+      .get('/enrollments/098765432109876')
       .expect(200);
     expect(res.body).not.toBe(null);
-    expect (res.body.studentId).toBe('6740f1a5c9e6f9a1b1234567');
-    expect (res.body.sectionId).toBe('6740f1a5c9e6f9a1b3333333');
-    expect (res.body.grade).toBe('B-');
+    expect (res.body.studentId).toBe('STU098765');
+    expect (res.body.departmentId).toBe('Math');
+    expect (res.body.gpa).toBe('3.2');
     expect (res.body).toBeInstanceOf(Object);
   });
 
   test('should edit created enrollment', async () => {
     
     const enrollment = {
-        enrollment_id: "0987654321",
-        studentId: "6740f1a5c9e6f9a1b1234567",
-        sectionId: "6740f1a5c9e6f9a1b3333333",
+        enrollmentId: "098765432109876",
+        studentId: "STU098765",
+        departmentId: "English",
         status: "enrolled",
         enrolledAt: "2025-08-20T12:00:00Z",
-        grade: "A+"
+        gpa: "3.5"
     };
 
     const res = await request(app)
-      .put('/enrollments/0987654321')
+      .put('/enrollments/098765432109876')
       .send(enrollment)
       .expect(204);
   });
 
   test('should return updated enrollment', async () => {
     const res = await request(app)
-      .get('/enrollments/0987654321')
+      .get('/enrollments/098765432109876')
       .expect(200);
     expect(res.body).not.toBe(null);
-    expect (res.body.enrollment_id).toBe("0987654321");
-    expect (res.body.grade).toBe('A+');
+    expect (res.body.enrollmentId).toBe("098765432109876");
+    expect (res.body.gpa).toBe('3.5');
+    expect (res.body.departmentId).toBe('English');
     expect (res.body).toBeInstanceOf(Object);
   });
 
   test('should delete enrollment', async () => {
     const res = await request(app)
-      .delete('/enrollments/0987654321')
+      .delete('/enrollments/098765432109876')
       .expect(204);
   });
 });

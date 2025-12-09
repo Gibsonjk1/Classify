@@ -35,7 +35,7 @@ describe('Teacher API Endpoints', () => {
   test('should create new teacher', async () => {
     
     const teacher = {
-    teacherId: "T000",
+    teacherId: "T0000000",
     firstName: "Mr.",
     lastName: "Rogers",
     email: "MrRogers@neighborhood.edu",
@@ -53,10 +53,10 @@ describe('Teacher API Endpoints', () => {
 
   test('should return created teacher', async () => {
     const res = await request(app)
-      .get('/teachers/T000')
+      .get('/teachers/T0000000')
       .expect(200);
     expect(res.body).not.toBe(null);
-    expect (res.body.teacherId).toBe('T000');
+    expect (res.body.teacherId).toBe('T0000000');
     expect (res.body.firstName).toBe('Mr.');
     expect (res.body.lastName).toBe('Rogers');
     expect (res.body.email).toBe('mrrogers@neighborhood.edu');
@@ -67,7 +67,7 @@ describe('Teacher API Endpoints', () => {
   test('should edit created teacher', async () => {
     
     const teacher = {
-    teacherId: "T000",
+    teacherId: "T0000000",
     firstName: "Mrs.",
     lastName: "Rogers",
     email: "MrsRogers@neighborhood.edu",
@@ -78,17 +78,17 @@ describe('Teacher API Endpoints', () => {
     };
 
     const res = await request(app)
-      .put('/teachers/T000')
+      .put('/teachers/T0000000')
       .send(teacher)
       .expect(204);
   });
 
   test('should return updated teacher', async () => {
     const res = await request(app)
-      .get('/teachers/T000')
+      .get('/teachers/T0000000')
       .expect(200);
  expect(res.body).not.toBe(null);
-    expect (res.body.teacherId).toBe('T000');
+    expect (res.body.teacherId).toBe('T0000000');
     expect (res.body.firstName).toBe('Mrs.');
     expect (res.body.lastName).toBe('Rogers');
     expect (res.body.email).toBe('mrsrogers@neighborhood.edu');
@@ -98,7 +98,7 @@ describe('Teacher API Endpoints', () => {
 
   test('should delete teacher', async () => {
     const res = await request(app)
-      .delete('/teachers/T000')
+      .delete('/teachers/T0000000')
       .expect(204);
   });
 });

@@ -12,8 +12,9 @@ validate.studentRules = () => {
       .trim()
       .escape()
       .notEmpty()
+      .withMessage("Student ID is required.")
       .isLength({ min: 9 })
-      .withMessage("Student ID is required"),
+      .withMessage("Student ID must be at least 9 characters."),
     //firstname required rule
     body("firstName")
       .trim()
@@ -64,8 +65,9 @@ validate.teacherRules = () => {
       .trim()
       .escape()
       .notEmpty()
+      .withMessage("Teacher ID is required.")
       .isLength({ min: 8 })
-      .withMessage("Teacher ID is required"),
+      .withMessage("Teacher ID must be at least 8 characters."),
     //firstname required rule
     body("firstName")
       .trim()
@@ -110,8 +112,9 @@ validate.semesterRules = () => {
       .trim()
       .escape()
       .notEmpty()
+      .withMessage("Semester ID is required.")
       .isLength({ min: 8 })
-      .withMessage("Semester ID is required."),
+      .withMessage("Semester ID must be at least 8 characters."),
     //semester year required rule
     body("year")
       .trim()
@@ -171,27 +174,31 @@ validate.enrollmentRules = () => {
       .trim()
       .escape()
       .notEmpty()
+      .withMessage("Enrollment ID is required.")
       .isLength({ min: 15 })
-      .withMessage("Enrollment ID is required."),
+      .withMessage("Enrollment ID must be at least 15 characters."),
     //student ID rules
     body("studentId")
       .trim()
       .escape()
       .notEmpty()
+      .withMessage("Student ID is required.")
       .isLength({ min: 8 })
-      .withMessage("Student ID is required."),
+      .withMessage("Student ID must be at least 8 characters."),
     //department ID rules
     body("departmentId")
       .trim()
       .escape()
       .notEmpty()
+      .withMessage("Department ID is required.")
       .isLength({ min: 2 })
-      .withMessage("Department ID is required."),
+      .withMessage("Department ID must be at least 2 characters."),
     //status required rule
     body("status")
       .trim()
       .escape()
       .notEmpty()
+      .withMessage("Enrollment status is required.")
       .isIn(["enrolled", "waitlisted", "dropped"])
       .withMessage("Please provide a valid enrollment status."),
     //enrolledAt required rule
@@ -224,8 +231,9 @@ validate.classroomRules = () => {
       .trim()
       .escape()
       .notEmpty()
+      .withMessage("Classroom ID is required.")
       .isLength({ min: 5 })
-      .withMessage("Classroom ID is required."),
+      .withMessage("Classroom ID must be at least 5 characters."),
     //room number required rule
     body("roomNumber")
       .trim()
@@ -267,8 +275,9 @@ validate.classRules = () => {
       .trim()
       .escape()
       .notEmpty()
+      .withMessage("Class ID is required.")
       .isLength({ min: 3 })
-      .withMessage("Class ID is required."),
+      .withMessage("Class ID must be at least 3 characters."),
     //Title required rule
     body("title")
       .trim()
@@ -324,8 +333,9 @@ validate.sectionRules = () => {
       .trim()
       .escape()
       .notEmpty()
-      .isLength({ min: 1 })
-      .withMessage("Teacher ID is required."),
+      .withMessage("Teacher ID is required.")
+      .isLength({ min: 4 })
+      .withMessage("Teacher ID must be at least 4 characters long."),
     //classroomId required rule
     body("classroomId")
       .trim()

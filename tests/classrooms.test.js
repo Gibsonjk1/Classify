@@ -34,8 +34,9 @@ describe('classroom API Endpoints', () => {
     
     const classroom = {
         classroomId: "Eng201",
-        building: "Engineering",
         roomNumber: "201",
+        buildingId: "ENG",
+        buildingName: "Engineering",
         capacity: 40
     };
 
@@ -51,7 +52,7 @@ describe('classroom API Endpoints', () => {
       .expect(200);
     expect(res.body).not.toBe(null);
     expect (res.body.classroomId).toBe('Eng201');
-    expect (res.body.building).toBe('Engineering');
+    expect (res.body.buildingName).toBe('Engineering');
     expect (res.body.roomNumber).toBe('201');
     expect (res.body.capacity).toBe('40');
     expect (res.body).toBeInstanceOf(Object);
@@ -61,8 +62,9 @@ describe('classroom API Endpoints', () => {
     
     const classroom = {
         classroomId: "Eng201",
-        building: "English",
         roomNumber: "201",
+        buildingId: "ENG",
+        buildingName: "English",
         capacity: 42
     };
 
@@ -74,11 +76,11 @@ describe('classroom API Endpoints', () => {
 
   test('should return updated classroom', async () => {
     const res = await request(app)
-      .get('/classrooms/eng201')
+      .get('/classrooms/Eng201')
       .expect(200);
     expect(res.body).not.toBe(null);
     expect (res.body.classroomId).toBe('Eng201');
-    expect (res.body.building).toBe('English');
+    expect (res.body.buildingName).toBe('English');
     expect (res.body.roomNumber).toBe('201');
     expect (res.body.capacity).toBe('42');
     expect (res.body).toBeInstanceOf(Object);
@@ -86,7 +88,7 @@ describe('classroom API Endpoints', () => {
 
   test('should delete Classroom', async () => {
     const res = await request(app)
-      .delete('/classroom/eng201')
+      .delete('/classrooms/Eng201')
       .expect(204);
   });
 });
