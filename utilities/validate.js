@@ -51,7 +51,7 @@ validate.studentRules = () => {
       .notEmpty()
       .isISO8601()
       .toDate()
-      .withMessage("Please provide a last name."),
+      .withMessage("Please provide a valid creation date."),
   ];
 };
 
@@ -92,8 +92,6 @@ validate.teacherRules = () => {
       .withMessage("A valid email is required."),
     // department required rule
     body("departments")
-      .trim()
-      .escape()
       .notEmpty()
       .isArray()
       .isLength({ min: 1 })
@@ -117,13 +115,10 @@ validate.semesterRules = () => {
       .withMessage("Semester ID must be at least 8 characters."),
     //semester year required rule
     body("year")
-      .trim()
-      .escape()
       .notEmpty()
-      .isInt()
+      .isInt({ min: 1900, max: 2100 })
       .toInt()
-      .isLength({ min: 4, max: 4 })
-      .withMessage("Semester year is required."),
+      .withMessage("Semester year must be a valid 4-digit year between 1900 and 2100."),
     //semester term required rule
     body("term")
       .trim()
@@ -156,8 +151,6 @@ validate.semesterRules = () => {
       }),
     // active status required rule
     body("active")
-      .trim()
-      .escape()
       .notEmpty()
       .isBoolean()
       .withMessage("Please provide a valid active status."),
@@ -203,21 +196,26 @@ validate.enrollmentRules = () => {
       .withMessage("Please provide a valid enrollment status."),
     //enrolledAt required rule
     body("enrolledAt")
-      .optional({ nullable: true })
+      .optional({ nullable: true, checkFalsy: true })
       .trim()
       .escape()
-      .isString()
-      .toDate()
       .isISO8601()
+      .toDate()
       .withMessage("Must be a date formatted as ISO8601"),
     //gpa required rule
     body("gpa")
-      .optional({ nullable: true })
-      .trim()
-      .escape()
-      .matches(/^\P{L}*$/u)
-      .isFloat()
-      .withMessage("must be formatted as a numeric grade point average (gpa) ")
+      .optional({ nullable: true, checkFalsy: true })
+      .custom((value) => {
+        if (value === null || value === undefined || value === '') {
+          return true; // Allow null/undefined/empty for optional field
+        }
+        const numValue = typeof value === 'string' ? parseFloat(value) : value;
+        if (isNaN(numValue) || numValue < 0 || numValue > 4.0) {
+          throw new Error('GPA must be a number between 0 and 4.0');
+        }
+        return true;
+      })
+      .withMessage("must be formatted as a numeric grade point average (gpa) between 0 and 4.0")
   ];
 };
 
@@ -257,7 +255,6 @@ validate.classroomRules = () => {
       .withMessage("Building name is required."),
     //capacity required rule
     body("capacity")
-      .trim()
       .notEmpty()
       .withMessage("Capacity is required.")
       .isNumeric()
@@ -287,7 +284,6 @@ validate.classRules = () => {
       .withMessage("Course title is required."),
     //credits required rule
     body("credits")
-      .trim()
       .notEmpty()
       .withMessage("Credits are required.")
       .isInt()
@@ -398,11 +394,10 @@ validate.sectionRules = () => {
       .withMessage("Time must be string formatted as 00:00"),
     //capacity required rule
     body("capacity")
-      .trim()
       .notEmpty()
       .withMessage("Capacity is required.")
-      .isNumeric()
-      .withMessage("Please provide a valid capacity number."),
+      .isInt({ min: 1 })
+      .withMessage("Please provide a valid capacity number (must be a positive integer)."),
   ];
 };
 /* ******************************

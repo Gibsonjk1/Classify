@@ -31,10 +31,10 @@ router.post(
   /* #swagger.tags = ['Teachers'] */
   validator.teacherRules(),
   validator.checkData,
-  /* #swagger.description = 'add teacher by teacherId'
-    #swagger.parameters['teacherId'] = {
+  /* #swagger.description = 'add teacher'
+    #swagger.parameters['teacher'] = {
       in: 'body',
-      description: 'Teacher ID obejct',
+      description: 'Teacher object',
       required: true,
       schema: {
         teacherId: 'TAT01912',
@@ -59,10 +59,16 @@ router.put(
   /* #swagger.tags = ['Teachers'] */
   validator.teacherRules(),
   validator.checkData,
-  /* #swagger.description = 'add teacher by teacherId'
+  /* #swagger.description = 'update teacher by teacherId'
     #swagger.parameters['teacherId'] = {
+      in: 'path',
+      required: true,
+      type: 'string',
+      description: 'Teacher ID'
+    }
+    #swagger.parameters['teacher'] = {
       in: 'body',
-      description: 'Teacher ID obejct',
+      description: 'Teacher object',
       required: true,
       schema: {
         teacherId: 'TAT01912',

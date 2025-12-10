@@ -161,7 +161,7 @@ classSectionsUtils.deleteBySectionId = async (req, res) => {
       throw error;
     }
   } catch (error) {
-    if ((error.name = "no such id")) {
+    if (error.name === "no such id") {
       res.status(404).json(error.message);
     } else {
       res

@@ -31,10 +31,10 @@ router.post(
   /* #swagger.tags = ['Classes'] */
   validator.classRules(),
   validator.checkData,
-  /* #swagger.description = 'add class by classId'
-    #swagger.parameters['classId'] = {
+  /* #swagger.description = 'add class'
+    #swagger.parameters['class'] = {
       in: 'body',
-      description: 'Class ID obejct',
+      description: 'Class object',
       required: true,
       schema: {
         classId: 'MECH360',
@@ -57,8 +57,14 @@ router.put(
   validator.checkData,
   /* #swagger.description = 'update class by classId'
     #swagger.parameters['classId'] = {
+      in: 'path',
+      required: true,
+      type: 'string',
+      description: 'Class ID'
+    }
+    #swagger.parameters['class'] = {
       in: 'body',
-      description: 'Class ID obejct',
+      description: 'Class object',
       required: true,
       schema: {
         classId: 'MECH360',

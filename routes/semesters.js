@@ -31,10 +31,10 @@ router.post(
   /* #swagger.tags = ['Semesters'] */
   validator.semesterRules(),
   validator.checkData,
-  /* #swagger.description = 'add semester by semesterId'
-    #swagger.parameters['semesterId'] = {
+  /* #swagger.description = 'add semester'
+    #swagger.parameters['semester'] = {
       in: 'body',
-      description: 'Semester ID obejct',
+      description: 'Semester object',
       required: true,
       schema: {
         semesterId: 'fall2025',
@@ -59,8 +59,14 @@ router.put(
   validator.checkData,
   /* #swagger.description = 'update semester by semesterId'
     #swagger.parameters['semesterId'] = {
+      in: 'path',
+      required: true,
+      type: 'string',
+      description: 'Semester ID'
+    }
+    #swagger.parameters['semester'] = {
       in: 'body',
-      description: 'Semester ID obejct',
+      description: 'Semester object',
       required: true,
       schema: {
         semesterId: 'fall2025',

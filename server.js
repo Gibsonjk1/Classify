@@ -37,6 +37,10 @@ app.use("/", require("./routes/index")).use(
   swaggerUi.setup(swaggerDocument)
 );
 
+// Error handler middleware (must be registered after all routes)
+const errorHandler = require("./middleware/errorHandler");
+app.use(errorHandler);
+
 const mongodb = require("./db/connection");
 
 // startServer: connect to DB and then start listening. Exported so tests can call init separately.

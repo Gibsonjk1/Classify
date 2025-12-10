@@ -31,10 +31,10 @@ router.post(
   /* #swagger.tags = ['Classrooms'] */
   validator.classroomRules(),
   validator.checkData,
-  /* #swagger.description = 'add classroom by classroomId'
-    #swagger.parameters['classroomId'] = {
+  /* #swagger.description = 'add classroom'
+    #swagger.parameters['classroom'] = {
       in: 'body',
-      description: 'Classroom ID obejct',
+      description: 'Classroom object',
       required: true,
       schema: {
         classroomId: 'MECHB360',
@@ -58,8 +58,14 @@ router.put(
   validator.checkData,
   /* #swagger.description = 'update classroom by classroomId'
     #swagger.parameters['classroomId'] = {
+      in: 'path',
+      required: true,
+      type: 'string',
+      description: 'Classroom ID'
+    }
+    #swagger.parameters['classroom'] = {
       in: 'body',
-      description: 'Classroom ID obejct',
+      description: 'Classroom object',
       required: true,
       schema: {
         classroomId: 'MECHB360',

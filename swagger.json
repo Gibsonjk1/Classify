@@ -107,8 +107,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -202,8 +202,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -243,12 +243,12 @@
         "tags": [
           "Classes"
         ],
-        "description": "add class by classId",
+        "description": "add class",
         "parameters": [
           {
-            "name": "classId",
+            "name": "class",
             "in": "body",
-            "description": "Class ID obejct",
+            "description": "Class object",
             "required": true,
             "schema": {
               "type": "object",
@@ -274,8 +274,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -308,9 +308,16 @@
         "parameters": [
           {
             "name": "classId",
-            "in": "body",
+            "in": "path",
             "required": true,
-            "description": "Class ID obejct",
+            "type": "string",
+            "description": "Class ID"
+          },
+          {
+            "name": "class",
+            "in": "body",
+            "description": "Class object",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
@@ -335,8 +342,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -376,12 +383,12 @@
         "tags": [
           "Classrooms"
         ],
-        "description": "add classroom by classroomId",
+        "description": "add classroom",
         "parameters": [
           {
-            "name": "classroomId",
+            "name": "classroom",
             "in": "body",
-            "description": "Classroom ID obejct",
+            "description": "Classroom object",
             "required": true,
             "schema": {
               "type": "object",
@@ -411,8 +418,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -445,9 +452,16 @@
         "parameters": [
           {
             "name": "classroomId",
-            "in": "body",
+            "in": "path",
             "required": true,
-            "description": "Classroom ID obejct",
+            "type": "string",
+            "description": "Classroom ID"
+          },
+          {
+            "name": "classroom",
+            "in": "body",
+            "description": "Classroom object",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
@@ -476,8 +490,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -517,12 +531,12 @@
         "tags": [
           "Teachers"
         ],
-        "description": "add teacher by teacherId",
+        "description": "add teacher",
         "parameters": [
           {
-            "name": "teacherId",
+            "name": "teacher",
             "in": "body",
-            "description": "Teacher ID obejct",
+            "description": "Teacher object",
             "required": true,
             "schema": {
               "type": "object",
@@ -558,8 +572,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -588,13 +602,20 @@
         "tags": [
           "Teachers"
         ],
-        "description": "add teacher by teacherId",
+        "description": "update teacher by teacherId",
         "parameters": [
           {
             "name": "teacherId",
-            "in": "body",
+            "in": "path",
             "required": true,
-            "description": "Teacher ID obejct",
+            "type": "string",
+            "description": "Teacher ID"
+          },
+          {
+            "name": "teacher",
+            "in": "body",
+            "description": "Teacher object",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
@@ -629,8 +650,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -670,12 +691,12 @@
         "tags": [
           "Students"
         ],
-        "description": "add student by studentId",
+        "description": "add student",
         "parameters": [
           {
-            "name": "studentId",
+            "name": "student",
             "in": "body",
-            "description": "Student ID obejct",
+            "description": "Student object",
             "required": true,
             "schema": {
               "type": "object",
@@ -709,8 +730,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -739,13 +760,20 @@
         "tags": [
           "Students"
         ],
-        "description": "add student by studentId",
+        "description": "update student by studentId",
         "parameters": [
           {
             "name": "studentId",
-            "in": "body",
+            "in": "path",
             "required": true,
-            "description": "Student ID obejct",
+            "type": "string",
+            "description": "Student ID"
+          },
+          {
+            "name": "student",
+            "in": "body",
+            "description": "Student object",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
@@ -778,8 +806,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -819,12 +847,12 @@
         "tags": [
           "Enrollments"
         ],
-        "description": "update enrollment by enrollmentId",
+        "description": "add enrollment",
         "parameters": [
           {
-            "name": "enrollmentId",
+            "name": "enrollment",
             "in": "body",
-            "description": "Enrollment ID obejct",
+            "description": "Enrollment object",
             "required": true,
             "schema": {
               "type": "object",
@@ -858,8 +886,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -892,9 +920,16 @@
         "parameters": [
           {
             "name": "enrollmentId",
-            "in": "body",
+            "in": "path",
             "required": true,
-            "description": "Enrollment ID obejct",
+            "type": "string",
+            "description": "Enrollment ID"
+          },
+          {
+            "name": "enrollment",
+            "in": "body",
+            "description": "Enrollment object",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
@@ -927,8 +962,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -968,12 +1003,12 @@
         "tags": [
           "Semesters"
         ],
-        "description": "add semester by semesterId",
+        "description": "add semester",
         "parameters": [
           {
-            "name": "semesterId",
+            "name": "semester",
             "in": "body",
-            "description": "Semester ID obejct",
+            "description": "Semester object",
             "required": true,
             "schema": {
               "type": "object",
@@ -1007,8 +1042,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -1041,9 +1076,16 @@
         "parameters": [
           {
             "name": "semesterId",
-            "in": "body",
+            "in": "path",
             "required": true,
-            "description": "Semester ID obejct",
+            "type": "string",
+            "description": "Semester ID"
+          },
+          {
+            "name": "semester",
+            "in": "body",
+            "description": "Semester object",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
@@ -1076,8 +1118,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "400": {
+            "description": "Bad Request"
           }
         }
       },

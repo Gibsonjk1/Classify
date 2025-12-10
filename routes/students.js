@@ -31,10 +31,10 @@ router.post(
   /* #swagger.tags = ['Students'] */
   validator.studentRules(),
   validator.checkData,
-  /* #swagger.description = 'add student by studentId'
-    #swagger.parameters['studentId'] = {
+  /* #swagger.description = 'add student'
+    #swagger.parameters['student'] = {
       in: 'body',
-      description: 'Student ID obejct',
+      description: 'Student object',
       required: true,
       schema: {
         studentId: 'SAL123456',
@@ -57,10 +57,16 @@ router.put(
   /* #swagger.tags = ['Students'] */
   validator.studentRules(),
   validator.checkData,
-  /* #swagger.description = 'add student by studentId'
+  /* #swagger.description = 'update student by studentId'
     #swagger.parameters['studentId'] = {
+      in: 'path',
+      required: true,
+      type: 'string',
+      description: 'Student ID'
+    }
+    #swagger.parameters['student'] = {
       in: 'body',
-      description: 'Student ID obejct',
+      description: 'Student object',
       required: true,
       schema: {
         studentId: 'SAL123456',

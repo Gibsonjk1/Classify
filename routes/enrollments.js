@@ -31,10 +31,10 @@ router.post(
   /* #swagger.tags = ['Enrollments'] */
   validator.enrollmentRules(),
   validator.checkData,
-  /* #swagger.description = 'update enrollment by enrollmentId'
-    #swagger.parameters['enrollmentId'] = {
+  /* #swagger.description = 'add enrollment'
+    #swagger.parameters['enrollment'] = {
       in: 'body',
-      description: 'Enrollment ID obejct',
+      description: 'Enrollment object',
       required: true,
       schema: {
         enrollmentId: 'MS0825SAL123456',
@@ -59,8 +59,14 @@ router.put(
   validator.checkData,
   /* #swagger.description = 'update enrollment by enrollmentId'
     #swagger.parameters['enrollmentId'] = {
+      in: 'path',
+      required: true,
+      type: 'string',
+      description: 'Enrollment ID'
+    }
+    #swagger.parameters['enrollment'] = {
       in: 'body',
-      description: 'Enrollment ID obejct',
+      description: 'Enrollment object',
       required: true,
       schema: {
         enrollmentId: 'MS0825SAL123456',
