@@ -54,7 +54,7 @@ describe('classroom API Endpoints', () => {
     expect (res.body.classroomId).toBe('Eng201');
     expect (res.body.buildingName).toBe('Engineering');
     expect (res.body.roomNumber).toBe('201');
-    expect (res.body.capacity).toBe('40');
+    expect (res.body.capacity).toBe(40);
     expect (res.body).toBeInstanceOf(Object);
   });
 
@@ -82,7 +82,7 @@ describe('classroom API Endpoints', () => {
     expect (res.body.classroomId).toBe('Eng201');
     expect (res.body.buildingName).toBe('English');
     expect (res.body.roomNumber).toBe('201');
-    expect (res.body.capacity).toBe('42');
+    expect (res.body.capacity).toBe(42);
     expect (res.body).toBeInstanceOf(Object);
   });
 

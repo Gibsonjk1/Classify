@@ -52,7 +52,7 @@ describe('Classes API Endpoints', () => {
     expect(res.body).not.toBe(null);
     expect (res.body.classId).toBe('UBW101');
     expect (res.body.title).toBe('Intro to Underwater Basket Weaving');
-    expect (res.body.credits).toBe('3');
+    expect (res.body.credits).toBe(3);
     expect (res.body).toBeInstanceOf(Object);
   });
 
@@ -78,7 +78,7 @@ describe('Classes API Endpoints', () => {
      expect(res.body).not.toBe(null);
     expect (res.body.classId).toBe('UBW101');
     expect (res.body.title).toBe("Intro to Underlava Basket Weaving");
-    expect (res.body.credits).toBe('2');
+    expect (res.body.credits).toBe(2);
     expect (res.body).toBeInstanceOf(Object);
   });
 
