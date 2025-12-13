@@ -11,6 +11,17 @@
     "https",
     "http"
   ],
+  "securityDefinitions": {
+    "googleOAuth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "flow": "implicit",
+      "scopes": {
+        "https://www.googleapis.com/auth/userinfo.profile": "Access profile information",
+        "https://www.googleapis.com/auth/userinfo.email": "Access email address"
+      }
+    }
+  },
   "paths": {
     "/": {
       "get": {
@@ -682,10 +693,18 @@
         ],
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": [
+              "https://www.googleapis.com/auth/userinfo.profile",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ]
       },
       "post": {
         "tags": [
@@ -732,8 +751,19 @@
         "responses": {
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": [
+              "https://www.googleapis.com/auth/userinfo.profile",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ]
       }
     },
     "/students/{studentId}": {
@@ -751,10 +781,18 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": [
+              "https://www.googleapis.com/auth/userinfo.profile",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ]
       },
       "put": {
         "tags": [
@@ -808,8 +846,19 @@
         "responses": {
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": [
+              "https://www.googleapis.com/auth/userinfo.profile",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -825,10 +874,18 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": [
+              "https://www.googleapis.com/auth/userinfo.profile",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ]
       }
     },
     "/enrollments/": {
@@ -838,10 +895,18 @@
         ],
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": [
+              "https://www.googleapis.com/auth/userinfo.profile",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ]
       },
       "post": {
         "tags": [
@@ -888,8 +953,19 @@
         "responses": {
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": [
+              "https://www.googleapis.com/auth/userinfo.profile",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ]
       }
     },
     "/enrollments/{enrollmentId}": {
@@ -907,10 +983,18 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": [
+              "https://www.googleapis.com/auth/userinfo.profile",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ]
       },
       "put": {
         "tags": [
@@ -964,8 +1048,19 @@
         "responses": {
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": [
+              "https://www.googleapis.com/auth/userinfo.profile",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -981,10 +1076,18 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "googleOAuth": [
+              "https://www.googleapis.com/auth/userinfo.profile",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ]
       }
     },
     "/semesters/": {
@@ -1143,5 +1246,6 @@
         }
       }
     }
-  }
+  },
+  "security": []
 }

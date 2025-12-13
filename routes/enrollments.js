@@ -2,6 +2,7 @@ const router = require("express").Router();
 const enrollmentsController = require("../controllers/enrollments");
 const utils = require("../utilities");
 const validator = require("../utilities/validate");
+const { requireAuth } = require("../middleware/auth");
 
 // ============================================
 // GET routes
@@ -9,17 +10,23 @@ const validator = require("../utilities/validate");
 // get all enrollments
 router.get(
   "/",
-  /* #swagger.tags = ['Enrollments'] */ utils.handleErrors(
-    enrollmentsController.getAllEnrollments
-  )
+  requireAuth,
+  /* #swagger.tags = ['Enrollments'] */
+  /* #swagger.security = [{
+      "googleOAuth": []
+  }] */
+  utils.handleErrors(enrollmentsController.getAllEnrollments)
 );
 
 // // get enrollment by enrollmentId
 router.get(
   "/:enrollmentId",
-  /* #swagger.tags = ['Enrollments'] */ utils.handleErrors(
-    enrollmentsController.getEnrollmentById
-  )
+  requireAuth,
+  /* #swagger.tags = ['Enrollments'] */
+  /* #swagger.security = [{
+      "googleOAuth": []
+  }] */
+  utils.handleErrors(enrollmentsController.getEnrollmentById)
 );
 
 // // ============================================
@@ -28,7 +35,11 @@ router.get(
 // // add enrollment
 router.post(
   "/",
+  requireAuth,
   /* #swagger.tags = ['Enrollments'] */
+  /* #swagger.security = [{
+      "googleOAuth": []
+  }] */
   validator.enrollmentRules(),
   validator.checkData,
   /* #swagger.description = 'add enrollment'
@@ -54,7 +65,11 @@ router.post(
 // update enrollment by enrollmentId
 router.put(
   "/:enrollmentId",
-  /* #swagger.tags = ['Enrollments'] */ 
+  requireAuth,
+  /* #swagger.tags = ['Enrollments'] */
+  /* #swagger.security = [{
+      "googleOAuth": []
+  }] */
   validator.enrollmentRules(),
   validator.checkData,
   /* #swagger.description = 'update enrollment by enrollmentId'
@@ -86,9 +101,12 @@ router.put(
 // // delete enrollment by enrollmentId
 router.delete(
   "/:enrollmentId",
-  /* #swagger.tags = ['Enrollments'] */ utils.handleErrors(
-    enrollmentsController.deleteEnrollmentById
-  )
+  requireAuth,
+  /* #swagger.tags = ['Enrollments'] */
+  /* #swagger.security = [{
+      "googleOAuth": []
+  }] */
+  utils.handleErrors(enrollmentsController.deleteEnrollmentById)
 );
 
 module.exports = router;

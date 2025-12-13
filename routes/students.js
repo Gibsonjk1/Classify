@@ -2,6 +2,7 @@ const router = require("express").Router();
 const studentsController = require("../controllers/students");
 const utils = require("../utilities");
 const validator = require("../utilities/validate");
+const { requireAuth } = require("../middleware/auth");
 
 // ============================================
 // GET routes
@@ -9,17 +10,23 @@ const validator = require("../utilities/validate");
 // get all students
 router.get(
   "/",
-  /* #swagger.tags = ['Students'] */ utils.handleErrors(
-    studentsController.getAllStudents
-  )
+  requireAuth,
+  /* #swagger.tags = ['Students'] */
+  /* #swagger.security = [{
+      "googleOAuth": []
+  }] */
+  utils.handleErrors(studentsController.getAllStudents)
 );
 
 // // get student by studentId
 router.get(
   "/:studentId",
-  /* #swagger.tags = ['Students'] */ utils.handleErrors(
-    studentsController.getByStudentId
-  )
+  requireAuth,
+  /* #swagger.tags = ['Students'] */
+  /* #swagger.security = [{
+      "googleOAuth": []
+  }] */
+  utils.handleErrors(studentsController.getByStudentId)
 );
 
 // // ============================================
@@ -28,7 +35,11 @@ router.get(
 // // add student
 router.post(
   "/",
+  requireAuth,
   /* #swagger.tags = ['Students'] */
+  /* #swagger.security = [{
+      "googleOAuth": []
+  }] */
   validator.studentRules(),
   validator.checkData,
   /* #swagger.description = 'add student'
@@ -54,7 +65,11 @@ router.post(
 // update student by studentId
 router.put(
   "/:studentId",
+  requireAuth,
   /* #swagger.tags = ['Students'] */
+  /* #swagger.security = [{
+      "googleOAuth": []
+  }] */
   validator.studentRules(),
   validator.checkData,
   /* #swagger.description = 'update student by studentId'
@@ -86,9 +101,12 @@ router.put(
 // // delete student by studentId
 router.delete(
   "/:studentId",
-  /* #swagger.tags = ['Students'] */ utils.handleErrors(
-    studentsController.deleteByStudentId
-  )
+  requireAuth,
+  /* #swagger.tags = ['Students'] */
+  /* #swagger.security = [{
+      "googleOAuth": []
+  }] */
+  utils.handleErrors(studentsController.deleteByStudentId)
 );
 
 module.exports = router;
