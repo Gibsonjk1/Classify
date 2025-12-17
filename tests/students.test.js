@@ -1,6 +1,20 @@
 require("dotenv").config();
 const request = require('supertest');
 const mongodb = require("../db/connection");
+const passport = require('passport');
+require('../config/passport');
+jest.mock('passport', () => ({
+  initialize: jest.fn(() => (req, res, next) => next()),
+  session: jest.fn(() => (req, res, next) => {
+    req.isAuthenticated = () => !!req.user;
+    req.logout = (cb) => { req.user = undefined; cb && cb(); };
+    next();
+  }),
+  authenticate: jest.fn(() => (req, res, next) => next()),
+  serializeUser: jest.fn(),
+  deserializeUser: jest.fn(),
+  use: jest.fn(),
+}));
 const { app } = require("../server");
 
 jest.setTimeout(30000); // Set timeout to 30 seconds for DB operations
@@ -23,9 +37,30 @@ describe('Student API Endpoints', () => {
     }
   });
 
+describe('GET /auth/google', () => {
+  test('should redirect on successful authentication', async () => {
+   
+    passport.authenticate.mockImplementation((strategy, options, callback) => (req, res, next) => {
+      const mockUser = { username: 'tester@test.com', password: 'BigFatTest123!' };
+      req.user = mockUser; 
+     
+      next();
+    });
+
+    
+    const response = await request(app)
+      .get('/auth/google/callback') 
+      .expect(302); 
+
+    expect(passport.authenticate).toHaveBeenCalledWith('google', {'scope': ['profile', 'email']});
+   
+  });
+});
+
   test('should return all students for GET /students', async () => {
     const res = await request(app)
       .get('/students')
+      .set('Authorization', 'Bearer test-token')
       .expect(200);
     expect(res.body).not.toBe(null);
   });
@@ -43,6 +78,7 @@ describe('Student API Endpoints', () => {
 
     const res = await request(app)
       .post('/students/')
+      .set('Authorization', 'Bearer test-token')
       .send(student)
       .expect(201);
   });
@@ -50,6 +86,7 @@ describe('Student API Endpoints', () => {
   test('should return created student', async () => {
     const res = await request(app)
       .get('/students/STU543210')
+      .set('Authorization', 'Bearer test-token')
       .expect(200);
     expect(res.body).not.toBe(null);
     expect (res.body.studentId).toBe('STU543210');
@@ -71,6 +108,7 @@ describe('Student API Endpoints', () => {
 
     const res = await request(app)
       .put('/students/STU543210')
+      .set('Authorization', 'Bearer test-token')
       .send(student)
       .expect(204);
   });
@@ -78,6 +116,7 @@ describe('Student API Endpoints', () => {
   test('should return updated student', async () => {
     const res = await request(app)
       .get('/students/STU543210')
+      .set('Authorization', 'Bearer test-token')
       .expect(200);
     expect(res.body).not.toBe(null);
     expect (res.body.studentId).toBe('STU543210');
@@ -89,6 +128,7 @@ describe('Student API Endpoints', () => {
   test('should delete student', async () => {
     const res = await request(app)
       .delete('/students/STU543210')
+      .set('Authorization', 'Bearer test-token')
       .expect(204);
   });
 });
