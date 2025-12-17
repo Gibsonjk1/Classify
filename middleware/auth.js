@@ -36,8 +36,20 @@ const requireAuth = (req, res, next) => {
     });
   }
   
-  // Redirect to Google OAuth for browser requests
-  res.redirect('/auth/google');
+  // Ensure session is saved before redirecting to OAuth
+  // This is critical for preserving returnTo across the OAuth flow
+  req.session.save((err) => {
+    if (err) {
+      console.error('[Auth Middleware] Error saving session:', err);
+      return res.status(500).json({
+        error: 'Server Error',
+        message: 'Failed to save session'
+      });
+    }
+    
+    // Redirect to Google OAuth for browser requests
+    res.redirect('/auth/google');
+  });
 };
 
 module.exports = { requireAuth };

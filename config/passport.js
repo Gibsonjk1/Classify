@@ -3,14 +3,36 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 // Determine callback URL based on environment
 const getCallbackURL = () => {
+  let callbackURL;
   if (process.env.HOST) {
-    return `https://${process.env.HOST}/auth/google/callback`;
+    callbackURL = `https://${process.env.HOST}/auth/google/callback`;
   } else if (process.env.NODE_ENV === "production") {
-    return "https://classify-7nzc.onrender.com/auth/google/callback";
+    callbackURL = "https://classify-7nzc.onrender.com/auth/google/callback";
   } else {
-    return `http://localhost:${process.env.PORT || 3000}/auth/google/callback`;
+    callbackURL = `http://localhost:${process.env.PORT || 3000}/auth/google/callback`;
   }
+  
+  // Log callback URL in development for debugging
+  if (process.env.NODE_ENV !== 'production' && !process.env.HOST) {
+    console.log('[Passport Config] OAuth Callback URL:', callbackURL);
+    console.log('[Passport Config] CLIENT_ID set:', !!process.env.CLIENT_ID);
+    console.log('[Passport Config] CLIENT_SECRET set:', !!process.env.CLIENT_SECRET);
+    // Show first 10 chars of CLIENT_ID for verification (safe to log)
+    if (process.env.CLIENT_ID) {
+      console.log('[Passport Config] CLIENT_ID (first 10 chars):', process.env.CLIENT_ID.substring(0, 10) + '...');
+    }
+    // Show last 4 chars of CLIENT_SECRET for verification (safe to log)
+    if (process.env.CLIENT_SECRET) {
+      console.log('[Passport Config] CLIENT_SECRET (last 4 chars):', '...' + process.env.CLIENT_SECRET.slice(-4));
+      console.log('[Passport Config] CLIENT_SECRET length:', process.env.CLIENT_SECRET.length, '(should typically be 24-40 chars)');
+    }
+  }
+  
+  return callbackURL;
 };
+
+// Export callback URL for diagnostic endpoint
+module.exports.getCallbackURL = getCallbackURL;
 
 passport.use(
   new GoogleStrategy(

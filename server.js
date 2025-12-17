@@ -47,6 +47,7 @@ app.use(
       secure: isProduction, // Only send over HTTPS in production
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      sameSite: isProduction ? 'lax' : 'lax', // 'lax' allows cookies to be sent on top-level redirects (needed for OAuth)
     },
   })
 );
