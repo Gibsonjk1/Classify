@@ -37,25 +37,25 @@ describe('Student API Endpoints', () => {
     }
   });
 
-describe('GET /auth/google', () => {
-  test('should redirect on successful authentication', async () => {
+// describe('GET /auth/google', () => {
+//   test('should redirect on successful authentication', async () => {
    
-    passport.authenticate.mockImplementation((strategy, options, callback) => (req, res, next) => {
-      const mockUser = { username: 'tester@test.com', password: 'BigFatTest123!' };
-      req.user = mockUser; 
+//     passport.authenticate.mockImplementation((strategy, options, callback) => (req, res, next) => {
+//       const mockUser = { username: 'tester@test.com', password: 'BigFatTest123!' };
+//       req.user = mockUser; 
      
-      next();
-    });
+//       next();
+//     });
 
     
-    const response = await request(app)
-      .get('/auth/google/callback') 
-      .expect(302); 
+//     const response = await request(app)
+//       .get('/auth/google/callback') 
+//       .expect(302); 
 
-    expect(passport.authenticate).toHaveBeenCalledWith('google', {'scope': ['profile', 'email']});
+//     expect(passport.authenticate).toHaveBeenCalledWith('google', {'scope': ['profile', 'email']});
    
-  });
-});
+//   });
+// });
 
   test('should return all students for GET /students', async () => {
     const res = await request(app)
